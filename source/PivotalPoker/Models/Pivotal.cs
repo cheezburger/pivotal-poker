@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using PivotalTrackerAPI.Domain.Model;
 
@@ -8,11 +6,12 @@ namespace PivotalPoker.Models
 {
     public class Pivotal : IPivotal
     {
+        private readonly string _key;
         private readonly PivotalUser _user;
 
-        public Pivotal()
+        public Pivotal(string key)
         {
-            var key = ConfigurationManager.AppSettings["PivotalUserAPIKey"];
+            _key = key;
             _user = new PivotalUser(key);
         }
 

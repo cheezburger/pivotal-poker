@@ -10,7 +10,8 @@ namespace PivotalPoker.Tests
         [Ignore]
         public void CanConnectToPivotal()
         {
-            var p = new Pivotal();
+            var config = new Config();
+            var p = new Pivotal(config.Get<string>("PivotalUserAPIKey"));
             var story = p.GetUnestimatedStory();
             Assert.That(story, Is.Not.Null);
         }

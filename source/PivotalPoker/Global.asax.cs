@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Autofac;
 using Autofac.Integration.Mvc;
+using PivotalPoker.Models;
 
 namespace PivotalPoker
 {
@@ -36,6 +37,7 @@ namespace PivotalPoker
         {
             var builder = new ContainerBuilder();
             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).AsSelf().AsImplementedInterfaces();
+            builder.Register(c => new Pivotal(c.Resolve<IConfig>().Get<string>("PivotalUserAPIKey"))).As<IPivotal>();
             builder.RegisterControllers(Assembly.GetExecutingAssembly());
 
             DependencyResolver.SetResolver(new AutofacDependencyResolver(builder.Build()));
