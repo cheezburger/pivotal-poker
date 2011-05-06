@@ -1,0 +1,1289 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PivotalTrackerAPI</name>
+    </assembly>
+    <members>
+        <member name="T:PivotalTrackerAPI.Domain.Model.PivotalMembershipList">
+            <summary>
+            Container class for lists of memberships
+            </summary>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalMembershipList.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalMembershipList.#ctor(System.Collections.Generic.IList{PivotalTrackerAPI.Domain.Model.PivotalMembership})">
+            <summary>
+            Constructor
+            </summary>
+            <param name="members">The members associated with the group</param>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalMembershipList.Memberships">
+            <summary>
+            Container property for memberships
+            </summary>
+        </member>
+        <member name="T:PivotalTrackerAPI.Domain.Model.PivotalStory">
+            <summary>
+            A single story in Pivotal
+            </summary>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalStory.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalStory.#ctor(PivotalTrackerAPI.Domain.Enumerations.PivotalStoryType,System.String,System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="storyType">The story type</param>
+            <param name="name">Name of the story</param>
+            <param name="description">Story description</param>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalStory.#ctor(PivotalTrackerAPI.Domain.Enumerations.PivotalStoryType,System.String,System.String,System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="storyType">The story type</param>
+            <param name="name">Name of the story</param>
+            <param name="description">Story description</param>
+            <param name="labels">Labels for the story</param>
+        </member>
+        <member name="F:PivotalTrackerAPI.Domain.Model.PivotalStory.ExcludeNodesOnSubmit">
+            <summary>
+            Attributes that should be removed from the XML before posting the data.
+            </summary>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalStory.FetchStories(PivotalTrackerAPI.Domain.Model.PivotalUser,System.Int32)">
+            <summary>
+            Gets all the stories for a project
+            </summary>
+            <param name="user">The user to get the ApiToken from</param>
+            <param name="projectId">The id of the project to get stories for</param>
+            <returns>the stories for the project</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalStory.FetchStories(PivotalTrackerAPI.Domain.Model.PivotalUser,System.Int32,System.String)">
+            <summary>
+            Gets the stories for a project using a filter to limit the data returned
+            </summary>
+            <see cref="T:PivotalTrackerAPI.Util.PivotalFilterHelper"/>
+            <param name="user">The user to get the ApiToken from</param>
+            <param name="projectId">The id of the project to get stories for</param>
+            <param name="filter">The filter to limit the data returned</param>
+            <returns>the stories for the project</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalStory.FetchStory(PivotalTrackerAPI.Domain.Model.PivotalUser,System.Int32,System.String)">
+            <summary>
+            Gets s single story for a project
+            </summary>
+            <param name="user">The user to get the ApiToken from</param>
+            <param name="projectId">The id of the project to get stories for</param>
+            <param name="storyId">The id of the story to get</param>
+            <returns>the stories for the project</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalStory.LoadTasks(PivotalTrackerAPI.Domain.Model.PivotalUser)">
+            <summary>
+            Updates the cache of tasks for the story and returns the list
+            </summary>
+            <param name="user">The user to get the ApiToken from</param>
+            <returns></returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalStory.AddStory(PivotalTrackerAPI.Domain.Model.PivotalUser,System.Int32,PivotalTrackerAPI.Domain.Model.PivotalStory)">
+            <summary>
+            Adds a story to Pivotal
+            </summary>
+            <param name="user">The user to get the ApiToken from</param>
+            <param name="projectId">The id of the project</param>
+            <param name="story">The story to add</param>
+            <returns>The created story</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalStory.AddStory(PivotalTrackerAPI.Domain.Model.PivotalUser,System.Int32,PivotalTrackerAPI.Domain.Model.PivotalStory,System.Boolean)">
+            <summary>
+            Adds a story to Pivotal
+            </summary>
+            <param name="user">The user to get the ApiToken from</param>
+            <param name="projectId">The id of the project</param>
+            <param name="story">The story to add</param>
+            <param name="saveTasks">Controls whether any tasks associated with the story should also be saved.</param>
+            <returns>The created story</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalStory.UpdateStory(PivotalTrackerAPI.Domain.Model.PivotalUser,System.String,PivotalTrackerAPI.Domain.Model.PivotalStory)">
+            <summary>
+            Updates a story without requiring a reference
+            </summary>
+            <param name="user">The user to get the ApiToken from</param>
+            <param name="projectId">The project id</param>
+            <param name="story">The story id</param>
+            <returns>The updated story instance</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalStory.UpdateStory(PivotalTrackerAPI.Domain.Model.PivotalUser)">
+            <summary>
+            Updates the story with new values
+            </summary>
+            <remarks>Uses reflection to iterate properties, so does carry some overhead in terms of performance</remarks>
+            <param name="user">The user to get the ApiToken from</param>
+            <returns>The updated story instance</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalStory.DeleteStory(PivotalTrackerAPI.Domain.Model.PivotalUser,System.String,PivotalTrackerAPI.Domain.Model.PivotalStory)">
+            <summary>
+            Deletes a story from Pivotal
+            </summary>
+            <param name="user">The user to get the ApiToken from</param>
+            <param name="projectId">The project id</param>
+            <param name="story">The story id</param>
+            <returns>The story that was deleted</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalStory.AddNote(PivotalTrackerAPI.Domain.Model.PivotalUser,System.String)">
+            <summary>
+            Adds a note (comment) to a story
+            </summary>
+            <param name="user">The user to get the ApiToken from</param>
+            <param name="noteText">The text to add to the story</param>
+            <returns>The text that was added</returns>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalStory.ProjectId">
+            <summary>
+            The Pivotal id of the project the story belongs to
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalStory.Id">
+            <summary>
+            The Pivotal id of the story
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalStory.StoryTypeString">
+            <summary>
+            The type of story as a string (use StoryType to get the enumeration)
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalStory.Name">
+            <summary>
+            The name of the story
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalStory.Description">
+            <summary>
+            The description for the story
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalStory.Requestor">
+            <summary>
+            The name of the person that requested the story
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalStory.Owner">
+            <summary>
+            The name of the owner of the story
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalStory.Labels">
+            <summary>
+            The labels associated with the story as a comma-delimited string
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalStory.Estimate">
+            <summary>
+            The point estimate for the story
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalStory.Url">
+            <summary>
+            The url for the story
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalStory.CurrentStateValue">
+            <summary>
+            The current state of the story
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalStory.CreationDateString">
+            <summary>
+            The date the story was created (as the original string from Pivotal).  Use CreationDate for the DateTime value
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalStory.AcceptedDateString">
+            <summary>
+            The date the story was accepted (as the original string from Pivotal)
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalStory.StoryType">
+            <summary>
+            The type of story
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalStory.AcceptedDate">
+            <summary>
+            The date the story was accepted
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalStory.LabelValues">
+            <summary>
+            Labels associated wth the story
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalStory.CurrentState">
+            <summary>
+            The current state of the story as an enumeration
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalStory.CreationDate">
+            <summary>
+            The creation date of the story
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalStory.Tasks">
+            <summary>
+            The cached list of tasks for the story.  Be sure to use LoadTasks before calling this.  Once that method is called, use this property to access previously retrieved tasks
+            </summary>
+            <remarks>If you set this property and intend to save it, you have to then iterate the collection of tasks and call add yourself or set the option when creating the story</remarks>
+        </member>
+        <member name="T:PivotalTrackerAPI.Util.SerializationHelper">
+            <summary>
+            Helper class for serializing objects to various formats
+            </summary>
+        </member>
+        <member name="M:PivotalTrackerAPI.Util.SerializationHelper.SerializeToBinaryFile``1(``0,System.String)">
+            <summary>
+            Serializes an object of type T to a binary file
+            </summary>
+            <typeparam name="T">The Type of object</typeparam>
+            <param name="t">The object to serialize</param>
+            <param name="inFilename">File to save</param>
+        </member>
+        <member name="M:PivotalTrackerAPI.Util.SerializationHelper.DeserializeFromBinaryFile``1(System.String)">
+            <summary>
+            Deserializes an object of type T from a binary file
+            </summary>
+            <typeparam name="T">The Type of object</typeparam>
+            <param name="inFilename">File to read</param>
+        </member>
+        <member name="M:PivotalTrackerAPI.Util.SerializationHelper.SerializeToXmlFile``1(``0,System.String)">
+            <summary>
+            Serializes an object of type T to an Xml file
+            </summary>
+            <typeparam name="T">The Type of object</typeparam>
+            <param name="t">The object to serialize</param>
+            <param name="inFilename">File to save</param>
+        </member>
+        <member name="M:PivotalTrackerAPI.Util.SerializationHelper.DeserializeFromXmlFile``1(System.String)">
+            <summary>
+            Serializes an Xml file to an instance object of type T
+            </summary>
+            <typeparam name="T">The Type of object</typeparam>
+            <param name="inFilename">File to read</param>
+        </member>
+        <member name="M:PivotalTrackerAPI.Util.SerializationHelper.SerializeToXmlString``1(``0)">
+            <summary>
+            Serializes an object of type T to an Xml string
+            </summary>
+            <typeparam name="T">The Type of object</typeparam>
+            <param name="t">The object to serialize</param>
+        </member>
+        <member name="M:PivotalTrackerAPI.Util.SerializationHelper.DeserializeFromXmlString``1(System.String)">
+            <summary>
+            Serializes an Xml string to an instance object of type T
+            </summary>
+            <typeparam name="T">The Type of object</typeparam>
+            <param name="xmlString">string to read</param>
+        </member>
+        <member name="M:PivotalTrackerAPI.Util.SerializationHelper.SerializeToXmlDocument``1(``0)">
+            <summary>
+            Serializes an object of type T to an XmlDocument
+            </summary>
+            <typeparam name="T">The Type of object</typeparam>
+            <param name="t">The object to serialize</param>
+        </member>
+        <member name="M:PivotalTrackerAPI.Util.SerializationHelper.DeserializeFromXmlDocument``1(System.Xml.XmlDocument)">
+            <summary>
+            Serializes an XmlDocument to an instance object of type T
+            </summary>
+            <typeparam name="T">The Type of object</typeparam>
+            <param name="xmlDocument">document to read</param>
+        </member>
+        <member name="T:PivotalTrackerAPI.Domain.Model.PivotalMembership">
+            <summary>
+            Membership information for a given person
+            </summary>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalMembership.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalMembership.#ctor(PivotalTrackerAPI.Domain.Model.PivotalPerson,System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="person">The person the membership is associated with</param>
+            <param name="role">The role of the person in the project</param>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalMembership.Id">
+            <summary>
+            The Pivotal id of the membership (not the person?)
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalMembership.Person">
+            <summary>
+            The person associated with the membership
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalMembership.Role">
+            <summary>
+            The role the person has in the project
+            </summary>
+        </member>
+        <member name="T:PivotalTrackerAPI.Domain.Services.PivotalService">
+            <summary>
+            The core class used to communicate with Pivotal.  This class is more of a helper to ensure that a method in a model has a consistent way to get data from Pivotal
+            </summary>
+        </member>
+        <member name="F:PivotalTrackerAPI.Domain.Services.PivotalService.BaseUrl">
+            <summary>
+            Url for the services (assumes http)
+            </summary>
+        </member>
+        <member name="F:PivotalTrackerAPI.Domain.Services.PivotalService.BaseUrlHttps">
+            <summary>
+            Url for the services (assumes https)
+            </summary>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Services.PivotalService.SubmitData(System.String,System.String,PivotalTrackerAPI.Domain.Enumerations.ServiceMethod)">
+            <summary>
+            Generic method to post data to the API
+            </summary>
+            <remarks>This method does not catch errors, so the caller needs to handle any failures to communicate with Pivotal</remarks>
+            <param name="url">Url to submit to</param>
+            <param name="data">Xml data as a string</param>
+            <param name="method">The method (PUT, DELETE, POST, or GET) to use when sending data to the server</param>
+            <returns>response from Pivotal API</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Services.PivotalService.GetData(System.String)">
+            <summary>
+            Generic method for getting data from the Pivotal API and returning the response
+            </summary>
+            <param name="url">The url to submit to</param>
+            <returns>The response from Pivotal</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Services.PivotalService.GetDataWithCredentials(System.String,System.String,System.String)">
+            <summary>
+            Generic method for getting data from the Pivotal API and returning the response but uses Basic Auth
+            </summary>
+            <param name="url">The url to submit to</param>
+            <param name="login">The user's login</param>
+            <param name="password">The user's password</param>
+            <returns>The response from Pivotal</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Services.PivotalService.CleanXmlForSubmission(System.Xml.XmlDocument,System.String,System.String[],System.Boolean)">
+            <summary>
+            Strips out content in a model instance that should not be submitted to Pivotal or that is blank (optional)
+            </summary>
+            <param name="xml">The xml document to clean up</param>
+            <param name="rootXpath">The root node to begin searching for elements</param>
+            <param name="ignoredNodes">A list of nodes that should be removed</param>
+            <param name="removeIfHasAttributes">Controls whether the cleanup should remove any attributes and remove any elements that have attributes (useful when the only reason for an attribute is the deserialization putting a nil attribute in the emitted xml)</param>
+            <returns>The cleaned xml as a string, ready for submission</returns>
+        </member>
+        <member name="T:PivotalTrackerAPI.Domain.Model.PivotalProject">
+            <summary>
+            A project in Pivotal
+            </summary>
+        </member>
+        <member name="F:PivotalTrackerAPI.Domain.Model.PivotalProject.ExcludeNodesOnSubmit">
+            <summary>
+            Attributes that should be removed from the XML before posting the data.
+            </summary>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalProject.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalProject.#ctor(System.Int32,System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="id">The Pivotal id of the project</param>
+            <param name="name">The project name</param>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalProject.LoadStories(PivotalTrackerAPI.Domain.Model.PivotalUser)">
+            <summary>
+            Loads the stories for the project and sets them in the Stories property
+            </summary>
+            <param name="user">The account to get the ApiToken from</param>
+            <returns>List of stories</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalProject.FetchStories(PivotalTrackerAPI.Domain.Model.PivotalUser)">
+            <summary>
+            Fetches current stories from Pivotal
+            </summary>
+            <param name="user">The user to get the ApiToken from</param>
+            <returns>stories for the project</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalProject.FetchStories(PivotalTrackerAPI.Domain.Model.PivotalUser,PivotalTrackerAPI.Util.PivotalFetchOptions)">
+            <summary>
+            Fetches current stories from Pivotal and optionally reloads the cache and uses the cache
+            </summary>
+            <param name="user">The user to get the ApiToken from</param>
+            <param name="options">Options for caching</param>
+            <returns>stories for the project</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalProject.FetchBugs(PivotalTrackerAPI.Domain.Model.PivotalUser)">
+            <summary>
+            Fetches current bugs from Pivotal
+            </summary>
+            <param name="user">The user to get the ApiToken from</param>
+            <returns>bugs for the project</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalProject.FetchBugs(PivotalTrackerAPI.Domain.Model.PivotalUser,PivotalTrackerAPI.Util.PivotalFetchOptions)">
+            <summary>
+            Fetches current bugs from Pivotal and optionally reloads the cache and uses the cache
+            </summary>
+            <remarks>The cache is updated with all stories, not just bugs, so this can be more intensive than intended.</remarks>
+            <param name="user">The user to get the ApiToken from</param>
+            <param name="options">Options for caching</param>
+            <returns>bugs for the project</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalProject.FetchChores(PivotalTrackerAPI.Domain.Model.PivotalUser)">
+            <summary>
+            Fetches current chores from Pivotal
+            </summary>
+            <param name="user">The user to get the ApiToken from</param>
+            <returns>bugs for the project</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalProject.FetchChores(PivotalTrackerAPI.Domain.Model.PivotalUser,PivotalTrackerAPI.Util.PivotalFetchOptions)">
+            <summary>
+            Fetches current chores from Pivotal and optionally reloads the cache and uses the cache
+            </summary>
+            <remarks>The cache is updated with all stories, not just chores, so this can be more intensive than intended.</remarks>
+            <param name="user">The user to get the ApiToken from</param>
+            <param name="options">Options for caching</param>
+            <returns>chores for the project</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalProject.FetchFeatures(PivotalTrackerAPI.Domain.Model.PivotalUser)">
+            <summary>
+            Fetches current features from Pivotal
+            </summary>
+            <param name="user">The user to get the ApiToken from</param>
+            <returns>features for the project</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalProject.FetchFeatures(PivotalTrackerAPI.Domain.Model.PivotalUser,PivotalTrackerAPI.Util.PivotalFetchOptions)">
+            <summary>
+            Fetches current features from Pivotal and optionally reloads the cache and uses the cache
+            </summary>
+            <remarks>The cache is updated with all stories, not just features, so this can be more intensive than intended.</remarks>
+            <param name="user">The user to get the ApiToken from</param>
+            <param name="options">Options for caching</param>
+            <returns>features for the project</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalProject.FetchReleases(PivotalTrackerAPI.Domain.Model.PivotalUser)">
+            <summary>
+            Fetches current releases from Pivotal
+            </summary>
+            <param name="user">The user to get the ApiToken from</param>
+            <returns>releases for the project</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalProject.FetchReleases(PivotalTrackerAPI.Domain.Model.PivotalUser,PivotalTrackerAPI.Util.PivotalFetchOptions)">
+            <summary>
+            Fetches current releases from Pivotal and optionally reloads the cache and uses the cache
+            </summary>
+            <remarks>The cache is updated with all stories, not just releases, so this can be more intensive than intended.</remarks>
+            <param name="user">The user to get the ApiToken from</param>
+            <param name="options">Options for caching</param>
+            <returns>releases for the project</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalProject.AddStory(PivotalTrackerAPI.Domain.Model.PivotalUser,PivotalTrackerAPI.Domain.Model.PivotalStory,System.Boolean)">
+            <summary>
+            Adds a story to Pivotal
+            </summary>
+            <param name="user">The user to get the ApiToken from</param>
+            <param name="story">The story to add</param>
+            <param name="saveTasks">Controls whether any tasks associated with the story should also be saved.</param>
+            <returns>The created story</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalProject.FetchProjects(PivotalTrackerAPI.Domain.Model.PivotalUser)">
+            <summary>
+            Fetches current projects from Pivot for a given user
+            </summary>
+            <param name="user">The user to get the ApiToken from</param>
+            <returns>List of projects accessible to the user</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalProject.FetchProject(PivotalTrackerAPI.Domain.Model.PivotalUser,System.Int32)">
+            <summary>
+            Fetches a single project from Pivotal and does not fetch the stories
+            </summary>
+            <param name="user">The user to get the ApiToken from</param>
+            <param name="projectId">The id of the project to retrieve</param>
+            <returns>project</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalProject.FetchProject(PivotalTrackerAPI.Domain.Model.PivotalUser,System.Int32,System.Boolean)">
+            <summary>
+            Fetches a single project from Pivotal and optionally retrieves the stories and sets them in the Stories property
+            </summary>
+            <param name="user">The user to get the ApiToken from</param>
+            <param name="projectId">The id of the project to retrieve</param>
+            <param name="loadStories">Whether to fetch stories and save them in the Stories property</param>
+            <returns>project</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalProject.AddProject(PivotalTrackerAPI.Domain.Model.PivotalUser,PivotalTrackerAPI.Domain.Model.PivotalProject)">
+            <summary>
+            Adds a project to Pivotal
+            </summary>
+            <param name="user">The user to get the ApiToken from (user will be owner of the project)</param>
+            <param name="project">Project information to add (anything not included in the project instance will not be submitted</param>
+            <returns>The added project</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalProject.UpdateProject(PivotalTrackerAPI.Domain.Model.PivotalUser)">
+            <summary>
+            Updates a project in Pivotal
+            </summary>
+            <param name="user">The user to get the ApiToken from (user will be owner of the project)</param>
+            <returns>The updated project</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalProject.UpdateProject(PivotalTrackerAPI.Domain.Model.PivotalUser,PivotalTrackerAPI.Domain.Model.PivotalProject)">
+            <summary>
+            Updates a project in Pivotal
+            </summary>
+            <param name="user">The user to get the ApiToken from (user will be owner of the project)</param>
+            <param name="project">Project information to update</param>
+            <returns>The updated project</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalProject.DeleteProject(PivotalTrackerAPI.Domain.Model.PivotalUser,PivotalTrackerAPI.Domain.Model.PivotalProject)">
+            <summary>
+            Removes a project in Pivotal (not sure this works)
+            </summary>
+            <param name="user">The user to get the ApiToken from</param>
+            <param name="project">The project to remove</param>
+            <returns>The project that was removed</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalProject.FetchMembers(PivotalTrackerAPI.Domain.Model.PivotalUser,PivotalTrackerAPI.Domain.Model.PivotalProject)">
+            <summary>
+            Retrieves the membership information for a project
+            </summary>
+            <param name="user">The user to get the ApiToken from</param>
+            <param name="project">The project to get membership info for</param>
+            <returns>List of members in the project</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalProject.FetchMembers(PivotalTrackerAPI.Domain.Model.PivotalUser)">
+            <summary>
+            Retrieves the membership information for the project
+            </summary>
+            <param name="user">The user to get the ApiToken from</param>
+            <returns>List of members in the project</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalProject.LoadMembers(PivotalTrackerAPI.Domain.Model.PivotalUser)">
+            <summary>
+            Retrieves the membership information for the project and updates the property to cache the list
+            </summary>
+            <param name="user">The user to get the ApiToken from</param>
+            <returns>List of members in the project</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalProject.AddMember(PivotalTrackerAPI.Domain.Model.PivotalUser,PivotalTrackerAPI.Domain.Model.PivotalProject,PivotalTrackerAPI.Domain.Model.PivotalMembership)">
+            <summary>
+            Adds a member to a project
+            </summary>
+            <param name="user">The user to get the ApiToken from</param>
+            <param name="project">The project to get membership info for</param>
+            <param name="member">The person and role to add to the project</param>
+            <returns>The added member's identity</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalProject.RemoveMember(PivotalTrackerAPI.Domain.Model.PivotalUser,PivotalTrackerAPI.Domain.Model.PivotalMembership)">
+            <summary>
+            Removes a member from a project in Pivotal
+            </summary>
+            <param name="user">The user to get the ApiToken from</param>
+            <param name="member">The member to remove</param>
+            <returns>The member that was removed</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalProject.RemoveMember(PivotalTrackerAPI.Domain.Model.PivotalUser,PivotalTrackerAPI.Domain.Model.PivotalProject,PivotalTrackerAPI.Domain.Model.PivotalMembership)">
+            <summary>
+            Removes a member from a project in Pivotal
+            </summary>
+            <param name="user">The user to get the ApiToken from</param>
+            <param name="project">The project to remove the person from</param>
+            <param name="member">The member to remove</param>
+            <returns>The member that was removed</returns>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalProject.Id">
+            <summary>
+            The Pivotal Id of the project
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalProject.Name">
+            <summary>
+            The Name of the project
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalProject.Labels">
+            <summary>
+            Labels used in the project (not sure what happens if this is set when creating the project.  May be only retrievable?)
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalProject.IterationLength">
+            <summary>
+            The length of iterations in the project.  Usually either 1 week or 2 weeks
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalProject.WeekStart">
+            <summary>
+            The string name of the day iterations start (Use WeekStartDay to get the number of the day)
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalProject.PointScale">
+            <summary>
+            The point scale to use for the project (Not sure this can be set?)
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalProject.VelocityScheme">
+            <summary>
+            The velocity scheme used to calculate the current velocity (Not sure this can be set?)
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalProject.CurrentVelocity">
+            <summary>
+            The current velocity of the project
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalProject.InitialVelocity">
+            <summary>
+            The initial velocity of the project
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalProject.NumberOfDoneIterationsToShow">
+            <summary>
+            Number of iterations completed to show in the UI
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalProject.IsPublic">
+            <summary>
+            Flag for whether the project is public
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalProject.WeekStartDay">
+            <summary>
+            Returns the day of the week iterations start on and null if the name of the day was not found
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalProject.LabelValues">
+            <summary>
+            Labels used in the project
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalProject.Stories">
+            <summary>
+            Holds the stories for the project, set when the LoadStories method is invoked
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalProject.Members">
+            <summary>
+            Holds the members in the project, set when the LoadMembers method is invoked
+            </summary>
+        </member>
+        <member name="T:PivotalTrackerAPI.Domain.Model.PivotalIterationList">
+            <summary>
+            Container class for groups of iterations
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalIterationList.Iterations">
+            <summary>
+            The iterations in the response from Pivotal
+            </summary>
+        </member>
+        <member name="T:PivotalTrackerAPI.Domain.Model.PivotalProjectList">
+            <summary>
+            Container class for a list of projects
+            </summary>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalProjectList.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalProjectList.#ctor(System.Collections.Generic.IList{PivotalTrackerAPI.Domain.Model.PivotalProject})">
+            <summary>
+            Constructor
+            </summary>
+            <param name="projects">List of projects</param>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalProjectList.Projects">
+            <summary>
+            The list of projects
+            </summary>
+        </member>
+        <member name="T:PivotalTrackerAPI.Domain.Enumerations.StoryState">
+            <summary>
+            The state of the story in Pivotal
+            </summary>
+        </member>
+        <member name="F:PivotalTrackerAPI.Domain.Enumerations.StoryState.Unknown">
+            <summary>
+            No state defined (default value and error case)
+            </summary>
+        </member>
+        <member name="F:PivotalTrackerAPI.Domain.Enumerations.StoryState.Unscheduled">
+            <summary>
+            Unscheduled
+            </summary>
+        </member>
+        <member name="F:PivotalTrackerAPI.Domain.Enumerations.StoryState.Unstarted">
+            <summary>
+            Unstarted
+            </summary>
+        </member>
+        <member name="F:PivotalTrackerAPI.Domain.Enumerations.StoryState.Started">
+            <summary>
+            Started
+            </summary>
+        </member>
+        <member name="F:PivotalTrackerAPI.Domain.Enumerations.StoryState.Finished">
+            <summary>
+            Finished
+            </summary>
+        </member>
+        <member name="F:PivotalTrackerAPI.Domain.Enumerations.StoryState.Delivered">
+            <summary>
+            Delivered
+            </summary>
+        </member>
+        <member name="F:PivotalTrackerAPI.Domain.Enumerations.StoryState.Accepted">
+            <summary>
+            Accepted
+            </summary>
+        </member>
+        <member name="F:PivotalTrackerAPI.Domain.Enumerations.StoryState.Rejected">
+            <summary>
+            Rejected
+            </summary>
+        </member>
+        <member name="T:PivotalTrackerAPI.Domain.Enumerations.PivotalStoryType">
+            <summary>
+            Types of stories used in Pivotal
+            </summary>
+        </member>
+        <member name="F:PivotalTrackerAPI.Domain.Enumerations.PivotalStoryType.feature">
+            <summary>
+            Feature
+            </summary>
+        </member>
+        <member name="F:PivotalTrackerAPI.Domain.Enumerations.PivotalStoryType.chore">
+            <summary>
+            Chore
+            </summary>
+        </member>
+        <member name="F:PivotalTrackerAPI.Domain.Enumerations.PivotalStoryType.bug">
+            <summary>
+            Bug
+            </summary>
+        </member>
+        <member name="F:PivotalTrackerAPI.Domain.Enumerations.PivotalStoryType.release">
+            <summary>
+            Release
+            </summary>
+        </member>
+        <member name="T:PivotalTrackerAPI.Domain.Enumerations.PivotalIterationGroup">
+            <summary>
+            The general groups of iterations in Pivotal
+            </summary>
+        </member>
+        <member name="F:PivotalTrackerAPI.Domain.Enumerations.PivotalIterationGroup.unknown">
+            <summary>
+            Default value -- used when the group is not known or has not been set
+            </summary>
+        </member>
+        <member name="F:PivotalTrackerAPI.Domain.Enumerations.PivotalIterationGroup.all">
+            <summary>
+            Used for retrieval -- indicates fetching records regardless of the state of the iteration
+            </summary>
+        </member>
+        <member name="F:PivotalTrackerAPI.Domain.Enumerations.PivotalIterationGroup.done">
+            <summary>
+            completed iterations
+            </summary>
+        </member>
+        <member name="F:PivotalTrackerAPI.Domain.Enumerations.PivotalIterationGroup.current">
+            <summary>
+            current iteration
+            </summary>
+        </member>
+        <member name="F:PivotalTrackerAPI.Domain.Enumerations.PivotalIterationGroup.backlog">
+            <summary>
+            the backlog of unstarted iterations
+            </summary>
+        </member>
+        <member name="T:PivotalTrackerAPI.Domain.Model.PivotalUser">
+            <summary>
+            User account in Pivotal.  This information cannot be updated via the API
+            </summary>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalUser.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalUser.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="apiToken">The user's api token</param>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalUser.GetUserFromCredentials(System.String,System.String)">
+            <summary>
+            Retrieves the user's information, including the token, from Pivotal
+            </summary>
+            <param name="login">The user's login</param>
+            <param name="password">The user's password</param>
+            <returns>A Pivotal User containing the ApiToken for the user</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalUser.FetchProjects">
+            <summary>
+            Retrieves the projects the user has access to
+            </summary>
+            <returns>The list of projects</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalUser.LoadProjects">
+            <summary>
+            Fetches projects for the user and saves them in the Projects property
+            </summary>
+            <returns>The list of projects</returns>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalUser.ApiToken">
+            <summary>
+            The ApiToken for the user -- used for all access to the Pivotal API.
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalUser.Id">
+            <summary>
+            The user's id in Pivotal
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalUser.Projects">
+            <summary>
+            Returns stored projects that are set when the LoadProjects method is invoked
+            </summary>
+        </member>
+        <member name="T:PivotalTrackerAPI.Domain.Model.PivotalTaskList">
+            <summary>
+            Container for a task list
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalTaskList.Tasks">
+            <summary>
+            List of tasks
+            </summary>
+        </member>
+        <member name="T:PivotalTrackerAPI.Domain.Enumerations.ServiceMethod">
+            <summary>
+            Methods for communicating with the server
+            </summary>
+        </member>
+        <member name="F:PivotalTrackerAPI.Domain.Enumerations.ServiceMethod.GET">
+            <summary>
+            GET request
+            </summary>
+        </member>
+        <member name="F:PivotalTrackerAPI.Domain.Enumerations.ServiceMethod.POST">
+            <summary>
+            POST request
+            </summary>
+        </member>
+        <member name="F:PivotalTrackerAPI.Domain.Enumerations.ServiceMethod.PUT">
+            <summary>
+            PUT request
+            </summary>
+        </member>
+        <member name="F:PivotalTrackerAPI.Domain.Enumerations.ServiceMethod.DELETE">
+            <summary>
+            DELETE request
+            </summary>
+        </member>
+        <member name="T:PivotalTrackerAPI.Util.PivotalFetchOptions">
+            <summary>
+            Options used when fetching data for a model.  Only used in models that maintain a cache
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Util.PivotalFetchOptions.UseCachedItems">
+            <summary>
+            Whether to use items that are currently cached (if false and the cache is empty, the cache will retrieve new items)
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Util.PivotalFetchOptions.RefreshCache">
+            <summary>
+            Whether to refresh the cache
+            </summary>
+        </member>
+        <member name="T:PivotalTrackerAPI.Domain.Model.PivotalStoryList">
+            <summary>
+            Container class for a list of stories
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalStoryList.Stories">
+            <summary>
+            List of stories
+            </summary>
+        </member>
+        <member name="T:PivotalTrackerAPI.Domain.Model.PivotalPerson">
+            <summary>
+            A person (account) in Pivotal
+            </summary>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalPerson.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalPerson.#ctor(System.String,System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="name">The person's name</param>
+            <param name="email">The person's email</param>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalPerson.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Constuctor
+            </summary>
+            <param name="name">The person's name</param>
+            <param name="email">The person's email</param>
+            <param name="initials">The person's initials</param>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalPerson.Email">
+            <summary>
+            The person's email address
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalPerson.Name">
+            <summary>
+            The person's full (display) name
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalPerson.Initials">
+            <summary>
+            The person's initials
+            </summary>
+        </member>
+        <member name="M:PivotalTrackerAPI.Util.WebEncoding.UrlEncode(System.String)">
+            <summary>
+            UrlEncodes a string without the requirement for System.Web
+            </summary>
+            <param name="text">The string to encode</param>
+            <returns></returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Util.WebEncoding.UrlDecode(System.String)">
+            <summary>
+            UrlDecodes a string without requiring System.Web
+            </summary>
+            <param name="text">String to decode.</param>
+            <returns>decoded string</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Util.WebEncoding.GetUrlEncodedKey(System.String,System.String)">
+            <summary>
+            Retrieves a value by key from a UrlEncoded string.
+            </summary>
+            <param name="urlEncoded">UrlEncoded String</param>
+            <param name="key">Key to retrieve value for</param>
+            <returns>returns the value or "" if the key is not found or the value is blank</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Util.WebEncoding.HtmlEncode(System.String)">
+            <summary>
+            HTML-encodes a string and returns the encoded string.
+            </summary>
+            <param name="text">The text string to encode. </param>
+            <returns>The HTML-encoded text.</returns>
+        </member>
+        <member name="T:PivotalTrackerAPI.Util.PivotalFilterHelper">
+            <summary>
+            Helpers used in constructing filters to use when querying Pivotal
+            </summary>
+        </member>
+        <member name="M:PivotalTrackerAPI.Util.PivotalFilterHelper.BuildLabelFilter(System.String,System.String)">
+            <summary>
+            Creates a query string to use as a filter parameter (does not prepend the ampersand)
+            </summary>
+            <param name="label">The label to filter on</param>
+            <param name="baseFilter">the filter to extend.  Leave blank or null to create a new filter base</param>
+            <returns>A query string</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Util.PivotalFilterHelper.BuildLabelFilter(System.Collections.Generic.IList{System.String},System.String)">
+            <summary>
+            Creates a query string to use as a filter parameter (does not prepend the ampersand)
+            </summary>
+            <param name="labels">The labels to filter on</param>
+            <param name="baseFilter">the filter to extend.  Leave blank or null to create a new filter base</param>
+            <returns>A query string</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Util.PivotalFilterHelper.BuildStoryTypeFilter(PivotalTrackerAPI.Domain.Enumerations.PivotalStoryType,System.String)">
+            <summary>
+            Creates a query string to use as a filter parameter (does not prepend the ampersand)
+            </summary>
+            <param name="storyType">The story type</param>
+            <param name="baseFilter">the filter to extend.  Leave blank or null to create a new filter base</param>
+            <returns>A query string</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Util.PivotalFilterHelper.BuildIdFilter(System.Collections.Generic.IList{System.Int32},System.String)">
+            <summary>
+            Creates a query string to use as a filter parameter (does not prepend the ampersand)
+            </summary>
+            <param name="ids">The list of ids to filter on</param>
+            <param name="baseFilter">the filter to extend.  Leave blank or null to create a new filter base</param>
+            <returns>A query string</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Util.PivotalFilterHelper.BuildStateFilter(System.String,System.String)">
+            <summary>
+            Creates a query string to use as a filter parameter (does not prepend the ampersand)
+            </summary>
+            <param name="state">The state of the items to query (unscheduled, unstarted, started, finished, delivered, accepted, or rejected)</param>
+            <param name="baseFilter">the filter to extend.  Leave blank or null to create a new filter base</param>
+            <returns>A query string</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Util.PivotalFilterHelper.BuildStateFilter(System.Collections.Generic.IList{System.String},System.String)">
+            <summary>
+            Creates a query string to use as a filter parameter (does not prepend the ampersand)
+            </summary>
+            <param name="states">The states of the items to query (unscheduled, unstarted, started, finished, delivered, accepted, or rejected)</param>
+            <param name="baseFilter">the filter to extend.  Leave blank or null to create a new filter base</param>
+            <returns>A query string</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Util.PivotalFilterHelper.BuildCreatedSinceFilter(System.DateTime,System.String)">
+            <summary>
+            Creates a query string to use as a filter parameter (does not prepend the ampersand)
+            </summary>
+            <param name="startDate">The beginning date to filter on</param>
+            <param name="baseFilter">the filter to extend.  Leave blank or null to create a new filter base</param>
+            <returns>A query string</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Util.PivotalFilterHelper.BuildModifiedSinceFilter(System.DateTime,System.String)">
+            <summary>
+            Creates a query string to use as a filter parameter (does not prepend the ampersand)
+            </summary>
+            <param name="startDate">The beginning date to filter on</param>
+            <param name="baseFilter">the filter to extend.  Leave blank or null to create a new filter base</param>
+            <returns>A query string</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Util.PivotalFilterHelper.BuildExternalIdFilter(System.String,System.String)">
+            <summary>
+            Creates a query string to use as a filter parameter (does not prepend the ampersand)
+            </summary>
+            <param name="id">The external id to filter on</param>
+            <param name="baseFilter">the filter to extend.  Leave blank or null to create a new filter base</param>
+            <returns>A query string</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Util.PivotalFilterHelper.BuildExternalIdFilter(System.Collections.Generic.IList{System.Int32},System.String)">
+            <summary>
+            Creates a query string to use as a filter parameter (does not prepend the ampersand)
+            </summary>
+            <param name="ids">The list of external ids to filter on</param>
+            <param name="baseFilter">the filter to extend.  Leave blank or null to create a new filter base</param>
+            <returns>A query string</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Util.PivotalFilterHelper.ConstructFilter(System.String,System.String,System.String)">
+            <summary>
+            General helper for creating a filter, mostly for use in the other methods in the PivotalFilterHelper (does not prepend the ampersand)
+            </summary>
+            <param name="baseFilter">the filter to extend.  Leave blank or null to create a new filter base</param>
+            <param name="filterName">The filter name in the query string</param>
+            <param name="filterValue">The filter value for the query string</param>
+            <returns>A query string</returns>
+        </member>
+        <member name="T:PivotalTrackerAPI.Domain.Model.PivotalTask">
+            <summary>
+            A task associated with a story
+            </summary>
+        </member>
+        <member name="F:PivotalTrackerAPI.Domain.Model.PivotalTask.ExcludeNodesOnSubmit">
+            <summary>
+            Attributes that should be removed from the XML before posting the data.
+            </summary>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalTask.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalTask.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="description">The task</param>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalTask.#ctor(System.String,System.Int32)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="description">The task</param>
+            <param name="position">The order of the task in the list</param>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalTask.#ctor(System.String,System.Int32,System.Boolean)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="description">The task</param>
+            <param name="position">The order of the task in the list</param>
+            <param name="isComplete">Whether the task is completed</param>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalTask.FetchTasks(PivotalTrackerAPI.Domain.Model.PivotalUser,System.Int32,System.Int32,System.String)">
+            <summary>
+            Retrieves tasks with an optional filter
+            </summary>
+            <param name="user">The user to get the ApiToken from</param>
+            <param name="projectId">The project id</param>
+            <param name="storyId">The story id</param>
+            <param name="filter">Filter to pass to Pivotal</param>
+            <returns></returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalTask.AddTask(PivotalTrackerAPI.Domain.Model.PivotalUser,System.Int32,System.Int32,PivotalTrackerAPI.Domain.Model.PivotalTask)">
+            <summary>
+            Adds a task to the story
+            </summary>
+            <param name="user">The user to get the ApiToken from</param>
+            <param name="projectId">The project id</param>
+            <param name="storyId">The story id</param>
+            <param name="task">The task to add</param>
+            <returns>The created task</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalTask.UpdateTask(PivotalTrackerAPI.Domain.Model.PivotalUser,System.Int32,System.Int32,PivotalTrackerAPI.Domain.Model.PivotalTask)">
+            <summary>
+            Updates a task without requiring a reference
+            </summary>
+            <param name="user">The user to get the ApiToken from</param>
+            <param name="projectId">The project id</param>
+            <param name="storyId">The story id</param>
+            <param name="task">The task to update</param>
+            <returns>The updated task instance</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalTask.UpdateTask(PivotalTrackerAPI.Domain.Model.PivotalUser,PivotalTrackerAPI.Domain.Model.PivotalStory)">
+            <summary>
+            Updates the task with new values
+            </summary>
+            <remarks>Uses reflection to iterate properties, so does carry some overhead in terms of performance</remarks>
+            <param name="user">The user to get the ApiToken from</param>
+            <param name="story">The story the task belongs to</param>
+            <returns>The updated task instance</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalTask.DeleteTask(PivotalTrackerAPI.Domain.Model.PivotalUser,System.Int32,System.Int32,PivotalTrackerAPI.Domain.Model.PivotalTask)">
+            <summary>
+            Deletes a task from a story
+            </summary>
+            <param name="user">The user to get the ApiToken from</param>
+            <param name="projectId">The project id</param>
+            <param name="storyId">The story id</param>
+            <param name="task">The task to delete</param>
+            <returns></returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalTask.DeleteTask(PivotalTrackerAPI.Domain.Model.PivotalUser,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Deletes a task from a story without requiring a task instance
+            </summary>
+            <param name="user">The user to get the ApiToken from</param>
+            <param name="projectId">The project id</param>
+            <param name="storyId">The story id</param>
+            <param name="taskId">The task to delete</param>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalTask.TaskId">
+            <summary>
+            The id of the task
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalTask.Position">
+            <summary>
+            The position of the task in the list (not sure this can be set via the API?)
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalTask.Description">
+            <summary>
+            The description (content) of the task
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalTask.Complete">
+            <summary>
+            Whether the task has been completed
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalTask.CreationDateString">
+            <summary>
+            The string representing the date the task was created (as returned by Pivotal).  See CreationDate for the value
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalTask.CreationDate">
+            <summary>
+            The date the task was created
+            </summary>
+        </member>
+        <member name="T:PivotalTrackerAPI.Domain.Model.PivotalIteration">
+            <summary>
+            A single iteration in Pivotal
+            </summary>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalIteration.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalIteration.CalculateVelocity">
+            <summary>
+            Calculates the iteration's velocity based on the estimates in the stories in the iteration
+            </summary>
+            <returns>The iteration's velocity</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalIteration.FetchIterations(PivotalTrackerAPI.Domain.Model.PivotalUser,System.Int32,PivotalTrackerAPI.Domain.Enumerations.PivotalIterationGroup)">
+            <summary>
+            Gets the stories for a project using a filter to limit the data returned
+            </summary>
+            <see cref="T:PivotalTrackerAPI.Util.PivotalFilterHelper"/>
+            <remarks>See http://www.pivotaltracker.com/help/api?version=v3#get_iterations_with_limit_and_offset</remarks>
+            <param name="user">The user to get the ApiToken from</param>
+            <param name="projectId">The id of the project to get stories for</param>
+            <param name="iterationGroup">The group of iterations to constrain the list to (use unknown or all to disregard this option)</param>
+            <returns>the stories grouped by iteration for the project</returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalIteration.FetchIterations(PivotalTrackerAPI.Domain.Model.PivotalUser,System.Int32,PivotalTrackerAPI.Domain.Enumerations.PivotalIterationGroup,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Gets the stories for a project using a filter to limit the data returned
+            </summary>
+            <see cref="T:PivotalTrackerAPI.Util.PivotalFilterHelper"/>
+            <remarks>See http://www.pivotaltracker.com/help/api?version=v3#get_iterations_with_limit_and_offset</remarks>
+            <param name="user">The user to get the ApiToken from</param>
+            <param name="projectId">The id of the project to get stories for</param>
+            <param name="iterationGroup">The group of iterations to constrain the list to (use unknown or all to disregard this option)</param>
+            <param name="limit">The maximum number of iterations to return</param>
+            <param name="offset">The number of iterations to skip from the beginning of the result.</param>
+            <returns>the stories grouped by iteration for the project</returns>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalIteration.Id">
+            <summary>
+            The id for the iteration
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalIteration.IterationNumber">
+            <summary>
+            The order of the iteration
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalIteration.StartDateString">
+            <summary>
+            The date the iteration started, or is expected to start (as the original string from Pivotal).  Use StartDate for the DateTime value
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalIteration.FinishDateString">
+            <summary>
+            The date the iteration finished, or is expected to finish (as the original string from Pivotal).  Use FinishDate for the DateTime value
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalIteration.Stories">
+            <summary>
+            The stories associated with the iteration
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalIteration.StartDate">
+            <summary>
+            The date the iteration started (or is expected to start)
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalIteration.FinishDate">
+            <summary>
+            The date the iteration finished (or is expected to finish)
+            </summary>
+        </member>
+    </members>
+</doc>
