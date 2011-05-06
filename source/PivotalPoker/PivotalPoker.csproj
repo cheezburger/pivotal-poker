@@ -87,7 +87,6 @@
     <Compile Include="Models\Pivotal.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\Project.cs" />
-    <Compile Include="Models\Story.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
