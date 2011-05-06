@@ -15,8 +15,7 @@ namespace PivotalPoker.Controllers
 
         public ActionResult Next()
         {
-            var story = new Story { Id = 1, Name = "FooBar" };
-            return Json(story, JsonRequestBehavior.AllowGet);
+            return Json(Pivotal.GetUnestimatedStory(), JsonRequestBehavior.AllowGet);
         }
     }
 }
