@@ -7,6 +7,7 @@ namespace PivotalPoker.Tests
     class PivotalTest
     {
         [Test]
+        [Ignore]
         public void CanConnectToPivotal()
         {
             var p = new Pivotal();
