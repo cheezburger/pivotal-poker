@@ -12,5 +12,11 @@ namespace PivotalPoker.Controllers
         }
 
         public IPivotal Pivotal { get; private set; }
+
+        public ActionResult Next()
+        {
+            var story = new Story { Id = 1, Name = "FooBar" };
+            return Json(story, JsonRequestBehavior.AllowGet);
+        }
     }
 }

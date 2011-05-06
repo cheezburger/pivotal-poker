@@ -6,6 +6,6 @@ namespace PivotalPoker.Models
 {
     public interface IPivotal
     {
-        PivotalStory GetUnestimatedStory();
+        Story GetUnestimatedStory();
     }
 }

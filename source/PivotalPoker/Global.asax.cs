@@ -21,6 +21,9 @@ namespace PivotalPoker
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapRoute("stories.next", "stories/next", new { controller = "Story", action = "Next" });
+            routes.MapRoute("stories", "stories/{id}/{action}", new { controller = "Story", action = "List" });
+
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
