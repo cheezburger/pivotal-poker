@@ -73,3 +73,14 @@ textarea
 {
     display: none;
 }
+
+
+.MyCard
+{
+    background: #278FAD;
+    border:1px solid #166a82;
+    color:#F8F5EE;
+    font-weight:bold;
+    outline:medium none;
+    float:left;
+}
