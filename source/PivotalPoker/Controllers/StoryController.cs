@@ -36,5 +36,14 @@ namespace PivotalPoker.Controllers
 
             return Json("");
         }
+
+        public ActionResult Votes(int id)
+        {
+            var game = Games.Get(id);
+            var votes = from card in game.GetCards()
+                        select new { name = card.Player.Name, vote = card.Value };
+
+            return Json(votes, JsonRequestBehavior.AllowGet);
+        }
     }
 }

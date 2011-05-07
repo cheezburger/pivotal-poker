@@ -15,19 +15,28 @@
 <div>
     <h3>Other People's Estimates</h3>
     <p id="otherEstimates">
-        <div class='OtherEstimate FloatLeft'>
-            <div class='Card' style='display:inline'>2</div>
-            <p>Foo Bar</p>
-        </div>
     </p>
 </div>
-
+<script id="cardTemplate" type="text/x-jquery-tmpl">
+    <div class='OtherEstimate FloatLeft'>
+        <div class='Card' style='display:inline'>${vote}</div>
+        <p>${name}</p>
+    </div>
+</script>
 <script type="text/javascript">
     $(document).ready(function () {
         $('.Selection').click(function () {
             $(".Card").removeClass("Selected");
             $(this).addClass("Selected");
             $.post('@Url.Action("vote", new { id = Model.Id })', { score: $(this).data('score') });
+        });
+        $('#otherEstimates').smartupdater({
+            url: '@Url.Action("votes")',
+            dataType: 'json',
+            minTimeout: 2000
+        }, function (data) {
+            var cards = $('#cardTemplate').tmpl(data);
+            $('#otherEstimates').empty().append(cards);
         });
     });
 </script>
