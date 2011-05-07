@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HomeControllerTests.cs" />
     <Compile Include="PivotalTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StoryControllerTests.cs" />

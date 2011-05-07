@@ -13,6 +13,11 @@ namespace PivotalPoker.Controllers
 
         public IPivotal Pivotal { get; private set; }
 
+        public ActionResult Index()
+        {
+            return View();
+        }
+
         public ActionResult Next()
         {
             return Json(Pivotal.GetUnestimatedStory(), JsonRequestBehavior.AllowGet);
