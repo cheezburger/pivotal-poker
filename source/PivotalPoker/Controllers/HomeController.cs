@@ -6,15 +6,17 @@ namespace PivotalPoker.Controllers
 {
     public class HomeController : Controller
     {
-        public HomeController(IGameStarter gameStarter, IPivotal pivotal)
+        public HomeController(IGameStarter gameStarter, IPivotal pivotal, GameRepository games)
         {
             GameStarter = gameStarter;
             Pivotal = pivotal;
+            Games = games;
         }
 
         public IGameStarter GameStarter { get; private set; }
 
         public IPivotal Pivotal { get; private set; }
+        public GameRepository Games { get; private set; }
 
         public ActionResult Index()
         {
@@ -33,7 +35,11 @@ namespace PivotalPoker.Controllers
             GameStarter.Name = name;
 
             var story = Pivotal.GetUnestimatedStory();
-            return RedirectToAction("Detail", "story", new { id = story.Id });
+            var game = Games.Get(story.Id);
+            if (game != null)
+                game.AddPlayer(new Player { Name = name });
+
+            return RedirectToAction("detail", "story", new { id = story.Id });
         }
     }
 }

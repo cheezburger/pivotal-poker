@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using PivotalPoker.Models;
 
@@ -6,21 +7,34 @@ namespace PivotalPoker.Controllers
 {
     public class StoryController : Controller
     {
-        public StoryController(IPivotal pivotal)
+        public StoryController(IPivotal pivotal, GameRepository games, IGameStarter gameStarter)
         {
             Pivotal = pivotal;
+            Games = games;
+            GameStarter = gameStarter;
         }
+
+        public GameRepository Games { get; private set; }
+        public IGameStarter GameStarter { get; private set; }
 
         public IPivotal Pivotal { get; private set; }
 
-        public ActionResult Detail()
+        public ActionResult Detail(int id)
         {
-            return View();
+            return View(Pivotal.GetStory(id));
         }
 
-        public ActionResult Next()
+        [HttpPost]
+        public ActionResult Vote(int id, int score)
         {
-            return Json(Pivotal.GetUnestimatedStory(), JsonRequestBehavior.AllowGet);
+            var game = Games.Get(id);
+            if (!game.Players.Any(p => p.Name == GameStarter.Name))
+                game.AddPlayer(new Player { Name = GameStarter.Name });
+
+            var player = game.Players.Single(p => p.Name == GameStarter.Name);
+            game.Play(new Card { Player = player, Value = score });
+
+            return Json("");
         }
     }
 }

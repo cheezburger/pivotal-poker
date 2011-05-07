@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace PivotalPoker.Models
 {
@@ -10,9 +7,12 @@ namespace PivotalPoker.Models
     {
         private static readonly ConcurrentDictionary<int, Game> Games = new ConcurrentDictionary<int, Game>();
 
-        public Game Get(int storyId)
+        public Game Get(int? storyId)
         {
-            return Games.GetOrAdd(storyId, _ => new Game());
+            if (storyId == null)
+                return null;
+
+            return Games.GetOrAdd(storyId.Value, _ => new Game());
         }
     }
 }

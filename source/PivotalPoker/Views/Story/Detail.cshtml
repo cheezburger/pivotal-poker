@@ -1,45 +1,33 @@
-﻿<script type="text/javascript">
-    var username = "";
-    var storyId = "";
+﻿@model PivotalTrackerAPI.Domain.Model.PivotalStory
 
-    refresh = function (data) {
-        storyId = data.Id;
-        $("#title").html(data.Name);
-        $("#description").html(data.Description);
-
-        $("#otherEstimates").html("");
-        //foreach (other user score){
-        var content = "X";  //user's score, or X if we're not showing scores
-        var otherName = "User Foo";
-        $("#otherEstimates").append("<div class='OtherEstimate FloatLeft'><div class='Card' style='display:inline'>" + content + "</div><p>" + otherName + "</p></div>");
-        //}
-    }
-
-    setScore = function (element, score) {
-        if (storyId == "")
-            return;
-
-        $(".Card").removeClass("Selected");
-        element.addClass("Selected");
-        //$.post();
-    }
-
-    $.get("/story/Next", refresh);
-</script>
-
-<h2 id="title">Fetching Story...</h2>
-<span id="description"></span>
+<h2 id="title">@Model.Name</h2>
+<span id="description">@Model.Description</span>
 
 <h3>Your Estimate</h3>
 
 <div style="clear: right;">
     @for(int i=0; i<=3; i++){
-        <div onClick="setScore($(this), @i);" class="Card FloatLeft">@i</div>
+        <div data-score="@i" class="Selection Card FloatLeft">@i</div>
     }
     <div style="clear: both;"></div>
 </div>
 
 <div>
     <h3>Other People's Estimates</h3>
-    <p id="otherEstimates"></p>
+    <p id="otherEstimates">
+        <div class='OtherEstimate FloatLeft'>
+            <div class='Card' style='display:inline'>2</div>
+            <p>Foo Bar</p>
+        </div>
+    </p>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.Selection').click(function () {
+            $(".Card").removeClass("Selected");
+            $(this).addClass("Selected");
+            $.post('@Url.Action("vote", new { id = Model.Id })', { score: $(this).data('score') });
+        });
+    });
+</script>
