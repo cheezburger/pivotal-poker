@@ -13,7 +13,7 @@
 </div>
 
 <div>
-    <h3>Other People's Estimates</h3>
+    <h3>All Estimates</h3>
     <p id="otherEstimates">
     </p>
 </div>
@@ -35,8 +35,7 @@
             dataType: 'json',
             minTimeout: 2000
         }, function (data) {
-            var cards = $('#cardTemplate').tmpl(data);
-            $('#otherEstimates').empty().append(cards);
+            $('#otherEstimates').empty().append($('#cardTemplate').tmpl(data));
         });
     });
 </script>
