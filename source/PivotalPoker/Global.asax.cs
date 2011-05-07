@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Autofac;
 using Autofac.Integration.Mvc;
+using PivotalPoker.Models;
 
 namespace PivotalPoker
 {
@@ -21,6 +22,9 @@ namespace PivotalPoker
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapRoute("stories.next", "stories/next", new { controller = "Story", action = "Next" });
+            routes.MapRoute("stories", "stories/{id}/{action}", new { controller = "Story", action = "List" });
+
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
@@ -33,6 +37,7 @@ namespace PivotalPoker
         {
             var builder = new ContainerBuilder();
             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).AsSelf().AsImplementedInterfaces();
+            builder.Register(c => new Pivotal(c.Resolve<IConfig>().Get<string>("PivotalUserAPIKey"))).As<IPivotal>();
             builder.RegisterControllers(Assembly.GetExecutingAssembly());
 
             DependencyResolver.SetResolver(new AutofacDependencyResolver(builder.Build()));
