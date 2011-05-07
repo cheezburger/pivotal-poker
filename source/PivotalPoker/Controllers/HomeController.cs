@@ -21,7 +21,7 @@ namespace PivotalPoker.Controllers
             if (!String.IsNullOrEmpty(GameStarter.Name))
             {
                 var story = Pivotal.GetUnestimatedStory();
-                return RedirectToAction("Index", "Story", new { id = story.Id });
+                return RedirectToAction("Detail", "Story", new { id = story.Id });
             }
 
             return View();
@@ -33,7 +33,7 @@ namespace PivotalPoker.Controllers
             GameStarter.Name = name;
 
             var story = Pivotal.GetUnestimatedStory();
-            return RedirectToAction("index", "story", new { id = story.Id });
+            return RedirectToAction("Detail", "story", new { id = story.Id });
         }
     }
 }

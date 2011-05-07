@@ -13,7 +13,7 @@ namespace PivotalPoker.Controllers
 
         public IPivotal Pivotal { get; private set; }
 
-        public ActionResult Index()
+        public ActionResult Detail()
         {
             return View();
         }
