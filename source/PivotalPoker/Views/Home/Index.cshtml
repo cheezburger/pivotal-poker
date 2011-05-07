@@ -1,11 +1,49 @@
-﻿@{
+﻿<script type="text/javascript">
+    var username = "";
+    var storyId = "";
+
+    refresh = function (data) {
+        storyId = data.Id;
+        $("#title").html(data.Name);
+        $("#description").html(data.Description);
+
+        $("#otherEstimates").html("");
+        //foreach (other user score){
+        var content = "X";  //user's score, or X if we're not showing scores
+        var otherName = "User Foo";
+        $("#otherEstimates").append("<div class='OtherEstimate FloatLeft'><div class='Card' style='display:inline'>" + content + "</div><p>" + otherName + "</p></div>");
+        //}
+    }
+
+    setScore = function (element, score) {
+        if (storyId == "")
+            return;
+
+        $(".Card").removeClass("Selected");
+        element.addClass("Selected");
+        //$.post();
+    }
+
+    $.get("/story/Next", refresh);
+</script>
+
+@{
     ViewBag.Title = "Pivotal Poker";
 }
 
-<h2>@ViewBag.Title</h2>
-@ViewBag.Description
+<h2 id="title">Fetching Story...</h2>
+<span id="description"></span>
 
-@for(int i=0; i<=3; i++)
-{
-    <div onClick="callback(@ViewBag.UserId, @i);" class="MyCard">@i</div>
-}
+<h3>Your Estimate</h3>
+
+<div style="clear: right;">
+    @for(int i=0; i<=3; i++){
+        <div onClick="setScore($(this), @i);" class="Card FloatLeft">@i</div>
+    }
+    <div style="clear: both;"></div>
+</div>
+
+<div>
+    <h3>Other People's Estimates</h3>
+    <p id="otherEstimates"></p>
+</div>
