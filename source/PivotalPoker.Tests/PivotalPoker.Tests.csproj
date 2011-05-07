@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\GameRepositoryTest.cs" />
     <Compile Include="Models\GameTest.cs" />
     <Compile Include="Models\PivotalTest.cs" />
     <Compile Include="Models\PlayerTest.cs" />

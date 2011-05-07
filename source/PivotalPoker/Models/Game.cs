@@ -16,8 +16,6 @@ namespace PivotalPoker.Models
             Players = new List<Player>();
         }
 
-        public string StoryId { get; set; }
-
         public ICollection<Player> Players { get; set; }
 
         public bool IsComplete

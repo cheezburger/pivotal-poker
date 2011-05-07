@@ -83,6 +83,7 @@
     <Compile Include="Models\Card.cs" />
     <Compile Include="Models\Config.cs" />
     <Compile Include="Models\Game.cs" />
+    <Compile Include="Models\GameRepository.cs" />
     <Compile Include="Models\IConfig.cs" />
     <Compile Include="Models\IPivotal.cs" />
     <Compile Include="Models\Pivotal.cs" />
