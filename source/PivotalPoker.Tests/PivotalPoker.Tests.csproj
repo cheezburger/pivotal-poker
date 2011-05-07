@@ -60,9 +60,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HomeControllerTests.cs" />
-    <Compile Include="PivotalTest.cs" />
+    <Compile Include="Models\GameTest.cs" />
+    <Compile Include="Models\PivotalTest.cs" />
+    <Compile Include="Models\PlayerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StoryControllerTests.cs" />
+    <Compile Include="Controllers\StoryControllerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

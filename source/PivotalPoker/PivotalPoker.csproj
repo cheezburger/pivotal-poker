@@ -80,6 +80,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Card.cs" />
     <Compile Include="Models\Config.cs" />
     <Compile Include="Models\CookieGameStarter.cs" />
     <Compile Include="Models\Game.cs" />
