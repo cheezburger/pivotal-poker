@@ -27,7 +27,7 @@ namespace PivotalPoker.Models
                 return cookie.Value;
             }
 
-            set { Request.Cookies.Add(new HttpCookie("pp.name", value)); }
+            set { Response.Cookies.Add(new HttpCookie("pp.name", value)); }
         }
     }
 }

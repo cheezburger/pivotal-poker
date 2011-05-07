@@ -33,7 +33,7 @@ namespace PivotalPoker.Controllers
             GameStarter.Name = name;
 
             var story = Pivotal.GetUnestimatedStory();
-            return RedirectToAction("Index", "Story", new { id = story.Id });
+            return RedirectToAction("index", "story", new { id = story.Id });
         }
     }
 }
