@@ -25,6 +25,7 @@ namespace PivotalPoker
             routes.MapRoute("stories.detail", "stories/{id}", new { controller = "Story", action = "Detail" });
             routes.MapRoute("stories.vote", "stories/{id}/vote", new { controller = "Story", action = "Vote" });
             routes.MapRoute("stories.votes", "stories/{id}/status", new { controller = "Story", action = "Status" });
+            routes.MapRoute("projects", "projects/{id}", new {controller = "Projects", action = "Index"});
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters

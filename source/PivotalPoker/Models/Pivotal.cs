@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using PivotalTrackerAPI.Domain.Model;
 
@@ -6,18 +7,17 @@ namespace PivotalPoker.Models
 {
     public class Pivotal : IPivotal
     {
-        private readonly string _key;
         private readonly PivotalUser _user;
-        private const int _projectId = 287145;
+        private const int ProjectId = 287145;
         public Pivotal(string key)
         {
-            _key = key;
             _user = new PivotalUser(key);
         }
 
+        private const int Unestimated = -1;
         public PivotalStory GetUnestimatedStory()
         {
-            return PivotalStory.FetchStories(_user, 287145).First(ps => ps.Estimate == -1);
+            return PivotalStory.FetchStories(_user, ProjectId).FirstOrDefault(ps => ps.Estimate == Unestimated);
         }
 
         public void EstimateStory(int storyId, int? points)
@@ -30,7 +30,12 @@ namespace PivotalPoker.Models
         // internal
         public PivotalStory GetStory(int storyId)
         {
-            return PivotalStory.FetchStory(_user, _projectId, storyId.ToString());
+            return PivotalStory.FetchStory(_user, ProjectId, storyId.ToString());
+        }
+
+        public IEnumerable<PivotalProject> GetProjects()
+        {
+            return PivotalProject.FetchProjects(_user);
         }
     }
 }

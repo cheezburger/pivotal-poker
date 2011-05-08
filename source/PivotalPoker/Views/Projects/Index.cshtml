@@ -1,0 +1,19 @@
+﻿@model IEnumerable<PivotalTrackerAPI.Domain.Model.PivotalProject>
+@{
+    ViewBag.Title = "Projects";
+}
+<h2>@ViewBag.Title</h2>
+@if (!Model.Any())
+{
+    <p>
+        There are no projects.</p>
+}
+else
+{
+    <ul>
+        @foreach (var project in Model)
+        {
+            <li>@Html.ActionLink(project.Name, "Index", new { Id = project.Id })</li>
+        }
+    </ul>
+}
