@@ -40,7 +40,7 @@ namespace PivotalPoker.Controllers
         {
             var game = Games.Get(id);
             var votes = from card in game.GetCards()
-                        select new { name = card.Player.Name, vote = card.Value };
+                        select new { name = card.Player.Name, vote = game.IsComplete ? card.Value.ToString() : "-" };
             var gameState = new { completed = game.IsComplete, votes };
 
             return Json(gameState, JsonRequestBehavior.AllowGet);
