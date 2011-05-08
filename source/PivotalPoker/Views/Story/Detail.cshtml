@@ -14,9 +14,12 @@
 
 <div>
     <h3>All Estimates</h3>
-    <p id="otherEstimates">
-    </p>
+    <div id="otherEstimates">
+    </div>
 </div>
+<p id="done" class="hidden">
+    @Html.ActionLink("Start next story", "Index", "Home")
+</p>
 <script id="card" type="text/html">
     {{#votes}}
     <div class='OtherEstimate FloatLeft'>
@@ -38,6 +41,7 @@
             minTimeout: 1000
         }, function (data) {
             $('#otherEstimates').empty().append(ich.card(data));
+            if (data.completed) $('#done').show();
         });
     });
 </script>
