@@ -70,5 +70,10 @@ namespace PivotalPoker.Models
             var handler = Consensus;
             if (handler != null) handler(GetPoints());
         }
+
+        public virtual void Reset()
+        {
+            _cards.Clear();
+        }
     }
 }

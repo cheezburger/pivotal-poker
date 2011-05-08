@@ -102,5 +102,16 @@ namespace PivotalPoker.Tests.Models
 
             Assert.That(returnedScore, Is.EqualTo(1));
         }
+
+        [Test]
+        public void CanResetGame()
+        {
+            var game = Play(null, "Rumples", 0);
+            Play(game, "HappyCat", 1);
+
+            game.Reset();
+
+            Assert.That(game.GetCards(), Is.Empty);
+        }
     }
 }

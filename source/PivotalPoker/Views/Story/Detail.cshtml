@@ -20,6 +20,9 @@
 <p id="done" class="hidden">
     @Html.ActionLink("Start next story", "Index", "Projects")
 </p>
+<p>
+    @Html.ActionLink("Reset game", "Reset", "Story")
+</p>
 <script id="card" type="text/html">
     {{#votes}}
     <div class='OtherEstimate FloatLeft'>

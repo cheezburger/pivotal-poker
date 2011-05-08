@@ -101,5 +101,20 @@ namespace PivotalPoker.Tests.Controllers
 
             Assert.That(game.Players, Has.Count.EqualTo(1));
         }
+
+        [Test]
+        public void CanResetGame()
+        {
+            const int projectId = 123, storyId = 456;
+
+            var gameMock = new Mock<Game>();
+            var gameRepositoryMock = new Mock<IGameRepository>();
+            gameRepositoryMock.Setup(g => g.Get(projectId, storyId)).Returns(gameMock.Object);
+            
+            var c = new StoryController(null, gameRepositoryMock.Object, null);
+            c.Reset(projectId, storyId);
+
+            gameMock.Verify(g => g.Reset());
+        }
     }
 }

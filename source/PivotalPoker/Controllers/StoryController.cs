@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using PivotalPoker.Models;
 
@@ -66,6 +67,12 @@ namespace PivotalPoker.Controllers
                 return "-";
 
             return card.Points.ToString();
+        }
+
+        public ActionResult Reset(int projectId, int storyId)
+        {
+            _games.Get(projectId, storyId).Reset();
+            return Content(string.Empty);
         }
     }
 }
