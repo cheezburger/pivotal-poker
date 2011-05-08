@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using NUnit.Framework;
 using PivotalPoker.Models;
+using PivotalPoker.Tests.Models;
 
 namespace PivotalPoker.Tests
 {
@@ -44,11 +45,8 @@ namespace PivotalPoker.Tests
         [Test]
         public void GameIsCompleteWhenAllPlayersHavePlayed()
         {
-            var game = new Game();
-            var player = new Player {Name = "Rumples"};
-            game.AddPlayer(player);
-            var card = new Card {Player = player, Value = 0};
-            game.Play(card);
+            var game = OM.GameM.Play(null, "Rumples", 0);
+            OM.GameM.Play(game, "HappyCat", 1);
 
             Assert.That(game.IsComplete);
         }
@@ -63,6 +61,14 @@ namespace PivotalPoker.Tests
             game.Play(card);
 
             game.AddPlayer(new Player {Name = "HappyCat"});
+
+            Assert.That(game.IsComplete, Is.False);
+        }
+
+        [Test]
+        public void GameIsIncompleteUnlessAtLeastTwoPlayersHavePlayed()
+        {
+            var game = OM.GameM.Play(null, "Rumples", 0);
 
             Assert.That(game.IsComplete, Is.False);
         }

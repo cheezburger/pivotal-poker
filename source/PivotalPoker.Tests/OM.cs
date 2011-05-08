@@ -1,6 +1,6 @@
 ﻿using PivotalPoker.Models;
 
-namespace PivotalPoker.Tests.Models
+namespace PivotalPoker.Tests
 {
     class OM
     {

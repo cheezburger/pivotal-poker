@@ -62,7 +62,7 @@
     <Compile Include="Models\GameRepositoryTest.cs" />
     <Compile Include="Controllers\HomeControllerTests.cs" />
     <Compile Include="Models\GameTest.cs" />
-    <Compile Include="Models\OM.cs" />
+    <Compile Include="OM.cs" />
     <Compile Include="Models\PivotalTest.cs" />
     <Compile Include="Models\PlayerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -24,7 +24,7 @@ namespace PivotalPoker.Models
         {
             get
             {
-                return Players.Count > 0 && Players.All(p => _cards.ContainsKey(p));
+                return Players.Count > 1 && Players.All(p => _cards.ContainsKey(p));
             }
         }
 
