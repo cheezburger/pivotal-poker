@@ -3,16 +3,24 @@ using System.Collections.Concurrent;
 
 namespace PivotalPoker.Models
 {
-    public class GameRepository
+    public class GameRepository : IGameRepository
     {
+        private readonly IPivotal _pivotal;
         private static readonly ConcurrentDictionary<int, Game> Games = new ConcurrentDictionary<int, Game>();
 
-        public Game Get(int? storyId)
+        public GameRepository(IPivotal pivotal)
         {
-            if (storyId == null)
-                return null;
+            _pivotal = pivotal;
+        }
 
-            return Games.GetOrAdd(storyId.Value, _ => new Game());
+        public Game Get(int storyId)
+        {
+            return Games.GetOrAdd(storyId, _ =>
+            {
+                var game = new Game();
+                game.Consensus += score => _pivotal.EstimateStory(storyId, score);
+                return game;
+            });
         }
     }
 }

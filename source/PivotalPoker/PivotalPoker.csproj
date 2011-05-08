@@ -86,6 +86,7 @@
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\GameRepository.cs" />
     <Compile Include="Models\IConfig.cs" />
+    <Compile Include="Models\IGameRepository.cs" />
     <Compile Include="Models\IGameStarter.cs" />
     <Compile Include="Models\IPivotal.cs" />
     <Compile Include="Models\Pivotal.cs" />

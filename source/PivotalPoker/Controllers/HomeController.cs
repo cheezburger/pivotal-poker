@@ -35,7 +35,7 @@ namespace PivotalPoker.Controllers
             GameStarter.Name = name;
 
             var story = Pivotal.GetUnestimatedStory();
-            var game = Games.Get(story.Id);
+            var game = Games.Get(story.Id.Value);
             if (game != null)
                 game.AddPlayer(new Player { Name = name });
 

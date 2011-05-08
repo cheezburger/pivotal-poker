@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
 using PivotalPoker.Models;
 
@@ -7,14 +6,14 @@ namespace PivotalPoker.Controllers
 {
     public class StoryController : Controller
     {
-        public StoryController(IPivotal pivotal, GameRepository games, IGameStarter gameStarter)
+        public StoryController(IPivotal pivotal, IGameRepository games, IGameStarter gameStarter)
         {
             Pivotal = pivotal;
             Games = games;
             GameStarter = gameStarter;
         }
 
-        public GameRepository Games { get; private set; }
+        public IGameRepository Games { get; private set; }
         public IGameStarter GameStarter { get; private set; }
 
         public IPivotal Pivotal { get; private set; }

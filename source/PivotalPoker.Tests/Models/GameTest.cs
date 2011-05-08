@@ -66,5 +66,50 @@ namespace PivotalPoker.Tests
 
             Assert.That(game.IsComplete, Is.False);
         }
+
+        [Test]
+        public void GameIndicatesIfAllPlayersAgree()
+        {
+            var game = Play(null, "Rumples", 1);
+            Play(game, "HappyCat", 1);
+            
+            Assert.That(game.HasConcensus);
+        }
+
+        [Test]
+        public void GameIndicatesIfAllPlayersDontAgree()
+        {
+            var game = Play(null, "Rumples", 1);
+            Play(game, "HappyCat", 0);
+
+            Assert.That(game.HasConcensus, Is.False);
+        }
+
+        private static Game Play(Game game, string playerName, int score)
+        {
+            if (game == null)
+                game = new Game();
+            var rumples = new Player { Name = playerName };
+            game.AddPlayer(rumples);
+            var card = new Card { Player = rumples, Value = score };
+            game.Play(card);
+            return game;
+        }
+
+        [Test]
+        public void GameAnnouncesConcensus()
+        {
+            var game = new Game();
+            var returnedScore = -1;
+            game.Consensus +=  score =>
+            {
+                returnedScore = score;
+            };
+
+            Play(game, "Rumples", 1);
+            Play(game, "HappyCat", 1);
+
+            Assert.That(returnedScore, Is.EqualTo(1));
+        }
     }
 }
