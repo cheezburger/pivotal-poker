@@ -69,6 +69,7 @@ namespace PivotalPoker.Controllers
             return card.Points.ToString();
         }
 
+        [HttpPost]
         public ActionResult Reset(int projectId, int storyId)
         {
             _games.Get(projectId, storyId).Reset();
