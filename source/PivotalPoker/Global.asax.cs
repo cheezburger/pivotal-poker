@@ -39,7 +39,9 @@ namespace PivotalPoker
             builder.RegisterModule(new AutofacWebTypesModule());
             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).AsSelf().AsImplementedInterfaces();
             builder.Register(c => new Pivotal(c.Resolve<IConfig>().Get<string>("PivotalUserAPIKey"))).As<IPivotal>();
+            builder.RegisterType<GameRepository>().AsImplementedInterfaces().SingleInstance();
             builder.RegisterControllers(Assembly.GetExecutingAssembly());
+            
 
             DependencyResolver.SetResolver(new AutofacDependencyResolver(builder.Build()));
 

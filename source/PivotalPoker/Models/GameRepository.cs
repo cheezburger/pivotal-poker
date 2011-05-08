@@ -6,7 +6,7 @@ namespace PivotalPoker.Models
     public class GameRepository : IGameRepository
     {
         private readonly IPivotal _pivotal;
-        private static readonly ConcurrentDictionary<int, Game> Games = new ConcurrentDictionary<int, Game>();
+        private readonly ConcurrentDictionary<int, Game> Games = new ConcurrentDictionary<int, Game>();
 
         public GameRepository(IPivotal pivotal)
         {

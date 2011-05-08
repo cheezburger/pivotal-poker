@@ -17,7 +17,7 @@ namespace PivotalPoker.Tests
         {
             var gameStarter = new Mock<IGameStarter>();
             var pivotal = new Mock<IPivotal>();
-            var games = new Mock<GameRepository>();
+            var games = new Mock<IGameRepository>();
             gameStarter.Setup(gs => gs.Name).Returns("");
 
             var controller = new HomeController(gameStarter.Object, pivotal.Object, games.Object);
@@ -32,7 +32,7 @@ namespace PivotalPoker.Tests
         {
             var gameStarter = new Mock<IGameStarter>();
             var pivotal = new Mock<IPivotal>();
-            var games = new Mock<GameRepository>();
+            var games = new Mock<IGameRepository>();
             pivotal.Setup(p => p.GetUnestimatedStory()).Returns(new PivotalStory { Id = 1 });
             gameStarter.Setup(gs => gs.Name).Returns("Foo");
 
@@ -48,7 +48,7 @@ namespace PivotalPoker.Tests
         {
             var gameStarter = new Mock<IGameStarter>();
             var pivotal = new Mock<IPivotal>();
-            var games = new Mock<GameRepository>();
+            var games = new Mock<IGameRepository>();
             pivotal.Setup(p => p.GetUnestimatedStory()).Returns(new PivotalStory { Id = 1 });
 
             var controller = new HomeController(gameStarter.Object, pivotal.Object, games.Object);

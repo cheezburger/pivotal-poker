@@ -6,17 +6,16 @@ namespace PivotalPoker.Controllers
 {
     public class HomeController : Controller
     {
-        public HomeController(IGameStarter gameStarter, IPivotal pivotal, GameRepository games)
+        public IGameStarter GameStarter { get; private set; }
+        public IPivotal Pivotal { get; private set; }
+        public IGameRepository Games { get; private set; }
+        
+        public HomeController(IGameStarter gameStarter, IPivotal pivotal, IGameRepository games)
         {
             GameStarter = gameStarter;
             Pivotal = pivotal;
             Games = games;
         }
-
-        public IGameStarter GameStarter { get; private set; }
-
-        public IPivotal Pivotal { get; private set; }
-        public GameRepository Games { get; private set; }
 
         public ActionResult Index()
         {
