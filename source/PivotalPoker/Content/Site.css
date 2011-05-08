@@ -96,7 +96,19 @@ textarea
     float: left;
     margin: 5px;
 }
+#otherEstimates 
+{
+    clear:both;
+    overflow: hidden;
+    padding-top: 10px;
+}
 .Selected
 {
     border:4px solid #002288;
 }
+
+.hidden
+{
+    display:none;
+}
+
