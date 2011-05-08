@@ -16,6 +16,7 @@ namespace PivotalPoker.Models
 
         public HttpResponseBase Response { get { return HttpContext.Response; } }
 
+
         public string Name
         {
             get
@@ -27,7 +28,10 @@ namespace PivotalPoker.Models
                 return cookie.Value;
             }
 
-            set { Response.Cookies.Add(new HttpCookie("pp.name", value)); }
+            set
+            {
+                Response.Cookies.Add(new HttpCookie("pp.name", value));
+            }
         }
     }
 }

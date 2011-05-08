@@ -13,7 +13,7 @@ else
     <ul>
         @foreach (var project in Model)
         {
-            <li>@Html.ActionLink(project.Name, "Index", new { Id = project.Id })</li>
+            <li>@Html.ActionLink(project.Name, "Index", new { projectId = project.Id })</li>
         }
     </ul>
 }

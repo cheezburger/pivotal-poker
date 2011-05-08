@@ -5,9 +5,9 @@ namespace PivotalPoker.Models
 {
     public interface IPivotal
     {
-        PivotalStory GetUnestimatedStory();
-        void EstimateStory(int storyId, int? points);
-        PivotalStory GetStory(int storyId);
+        PivotalStory GetUnestimatedStory(int projectId);
+        void EstimateStory(int projectId, int storyId, int points);
+        PivotalStory GetStory(int projectId, int storyId);
         IEnumerable<PivotalProject> GetProjects();
     }
 }

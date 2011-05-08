@@ -18,7 +18,7 @@
     </div>
 </div>
 <p id="done" class="hidden">
-    @Html.ActionLink("Start next story", "Index", "Home")
+    @Html.ActionLink("Start next story", "Index", "Projects")
 </p>
 <script id="card" type="text/html">
     {{#votes}}
@@ -33,7 +33,7 @@
         $('.Selection').click(function () {
             $(".Card").removeClass("Selected");
             $(this).addClass("Selected");
-            $.post('@Url.Action("vote", new { id = Model.Id })', { score: $(this).data('score') });
+            $.post('@Url.Action("vote")', { score: $(this).data('score') });
         });
         $('#otherEstimates').smartupdater({
             url: '@Url.Action("status")',

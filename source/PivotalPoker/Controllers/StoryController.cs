@@ -6,44 +6,66 @@ namespace PivotalPoker.Controllers
 {
     public class StoryController : Controller
     {
+        private readonly IPivotal _pivotal;
+        private readonly IGameRepository _games;
+        private readonly IGameStarter _gameStarter;
+
         public StoryController(IPivotal pivotal, IGameRepository games, IGameStarter gameStarter)
         {
-            Pivotal = pivotal;
-            Games = games;
-            GameStarter = gameStarter;
+            _pivotal = pivotal;
+            _games = games;
+            _gameStarter = gameStarter;
         }
 
-        public IGameRepository Games { get; private set; }
-        public IGameStarter GameStarter { get; private set; }
+        private string CurrentUserName { get { return _gameStarter.Name; } }
 
-        public IPivotal Pivotal { get; private set; }
-
-        public ActionResult Detail(int id)
+        public ActionResult Detail(int projectId, int storyId)
         {
-            return View(Pivotal.GetStory(id));
+            var game = _games.Get(projectId, storyId);
+            EnsurePlayerExists(game, CurrentUserName);
+
+            return View(_pivotal.GetStory(projectId, storyId));
+        }
+
+        private static void EnsurePlayerExists(Game game, string playerName)
+        {
+            if (!game.Players.Any(p => p.Name == playerName))
+                game.AddPlayer(new Player { Name = playerName });
         }
 
         [HttpPost]
-        public ActionResult Vote(int id, int score)
+        public ActionResult Vote(int projectId, int storyId, int score)
         {
-            var game = Games.Get(id);
-            if (!game.Players.Any(p => p.Name == GameStarter.Name))
-                game.AddPlayer(new Player { Name = GameStarter.Name });
+            var game = _games.Get(projectId, storyId);
+            EnsurePlayerExists(game, CurrentUserName);
 
-            var player = game.Players.Single(p => p.Name == GameStarter.Name);
-            game.Play(new Card { Player = player, Value = score });
+            var player = game.Players.Single(p => p.Name == CurrentUserName);
+            game.Play(new Card { Player = player, Points = score });
 
-            return Status(id);
+            return Status(projectId, storyId);
         }
 
-        public ActionResult Status(int id)
+        public ActionResult Status(int projectId, int storyId)
         {
-            var game = Games.Get(id);
-            var votes = from card in game.GetCards()
-                        select new { name = card.Player.Name, vote = game.IsComplete ? card.Value.ToString() : "-" };
+            var game = _games.Get(projectId, storyId);
+            var votes = from player in game.Players
+                        join card in game.GetCards()
+                        on player equals card.Player into playerCard
+                        from card in playerCard.DefaultIfEmpty()
+                        select new { name = player.Name, vote = RenderPoint(game.IsComplete, card) };
             var gameState = new { completed = game.IsComplete, votes };
 
             return Json(gameState, JsonRequestBehavior.AllowGet);
+        }
+
+        private static string RenderPoint(bool isComplete, Card card)
+        {
+            if (card == null)
+                return "?";
+            if (!isComplete)
+                return "-";
+
+            return card.Points.ToString();
         }
     }
 }

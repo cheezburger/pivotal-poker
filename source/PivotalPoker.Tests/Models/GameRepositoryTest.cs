@@ -10,8 +10,9 @@ namespace PivotalPoker.Tests.Models
         [Test]
         public void GettingNonExistantGameReturnsNewGame()
         {
+            const int projectId = 123, storyId = 456;
             var gameRepository = new GameRepository(null);
-            var game = gameRepository.Get(0);
+            var game = gameRepository.Get(projectId, storyId);
             Assert.That(game, Is.Not.Null);
         }
 
@@ -20,27 +21,27 @@ namespace PivotalPoker.Tests.Models
         {
             var gameRepository = new GameRepository(null);
             const int storyId = 0;
-            var game = gameRepository.Get(storyId);
+            var game = gameRepository.Get(-1, storyId);
 
-            var player = new Player {Name = "Rumples"};
+            var player = new Player { Name = "Rumples" };
             game.AddPlayer(player);
 
-            game = gameRepository.Get(storyId);
+            game = gameRepository.Get(-1, storyId);
             Assert.That(game.Players, Has.Count.EqualTo(1));
         }
 
         [Test]
         public void UpdatesPivotalWhenGameReachesConsensus()
         {
-            const int storyId = 0, points = 0;
+            const int projectId = 123, storyId = 456, points = 0;
             var pivotalMock = new Mock<IPivotal>();
 
             var gameRepository = new GameRepository(pivotalMock.Object);
-            var game = gameRepository.Get(storyId);
-            OM.GameM.Play(game, "Rumples", 0);
-            OM.GameM.Play(game, "HappyCat", 0);
+            var game = gameRepository.Get(projectId, storyId);
+            OM.GameM.Play(game, "Rumples", points);
+            OM.GameM.Play(game, "HappyCat", points);
 
-            pivotalMock.Verify(p => p.EstimateStory(storyId, points));
+            pivotalMock.Verify(p => p.EstimateStory(projectId, storyId, points));
         }
     }
 }

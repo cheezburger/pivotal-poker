@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 
 namespace PivotalPoker.Models
 {
@@ -13,12 +12,12 @@ namespace PivotalPoker.Models
             _pivotal = pivotal;
         }
 
-        public Game Get(int storyId)
+        public Game Get(int projectId, int storyId)
         {
             return Games.GetOrAdd(storyId, _ =>
             {
                 var game = new Game();
-                game.Consensus += score => _pivotal.EstimateStory(storyId, score);
+                game.Consensus += score => _pivotal.EstimateStory(projectId, storyId, score);
                 return game;
             });
         }

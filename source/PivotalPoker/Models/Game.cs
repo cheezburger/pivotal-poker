@@ -30,12 +30,12 @@ namespace PivotalPoker.Models
 
         public bool HasConcensus
         {
-            get { return GetCards().Select(c => c.Value).Distinct().Count() == 1; }
+            get { return GetCards().Select(c => c.Points).Distinct().Count() == 1; }
         }
 
-        private int GetScore()
+        private int GetPoints()
         {
-            return GetCards().Select(c => c.Value).Distinct().Single();
+            return GetCards().Select(c => c.Points).Distinct().Single();
         }
 
         public void AddPlayer(Player player)
@@ -61,14 +61,14 @@ namespace PivotalPoker.Models
         }
 
         /// <summary>
-        /// Gets passed the score
+        /// Gets passed the points
         /// </summary>
         public event Action<int> Consensus;
 
         public void InvokeConsensus()
         {
             var handler = Consensus;
-            if (handler != null) handler(GetScore());
+            if (handler != null) handler(GetPoints());
         }
     }
 }

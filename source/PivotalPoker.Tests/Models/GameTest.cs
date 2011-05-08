@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using NUnit.Framework;
 using PivotalPoker.Models;
-using PivotalPoker.Tests.Models;
 
-namespace PivotalPoker.Tests
+namespace PivotalPoker.Tests.Models
 {
     [TestFixture]
     public class GameTest
@@ -26,13 +22,13 @@ namespace PivotalPoker.Tests
             var player = new Player {Name = "Rumples"};
             game.AddPlayer(player);
 
-            var card = new Card {Player = player, Value = 0};
+            var card = new Card {Player = player, Points = 0};
             game.Play(card);
 
             var cards = game.GetCards();
             var result = cards.First();
             Assert.That(result.Player.Name, Is.EqualTo(player.Name));
-            Assert.That(result.Value, Is.EqualTo(card.Value));
+            Assert.That(result.Points, Is.EqualTo(card.Points));
         }
 
         [Test]
@@ -54,12 +50,7 @@ namespace PivotalPoker.Tests
         [Test]
         public void GameIsIncompleteWhenNotAllPlayersHavePlayed()
         {
-            var game = new Game();
-            var rumples = new Player { Name = "Rumples" };
-            game.AddPlayer(rumples);
-            var card = new Card { Player = rumples, Value = 0 };
-            game.Play(card);
-
+            var game = OM.GameM.Play(null, "Rumples", 0);
             game.AddPlayer(new Player {Name = "HappyCat"});
 
             Assert.That(game.IsComplete, Is.False);
@@ -68,7 +59,7 @@ namespace PivotalPoker.Tests
         [Test]
         public void GameIsIncompleteUnlessAtLeastTwoPlayersHavePlayed()
         {
-            var game = OM.GameM.Play(null, "Rumples", 0);
+            var game = Play(null, "Rumples", 0);
 
             Assert.That(game.IsComplete, Is.False);
         }
@@ -93,13 +84,7 @@ namespace PivotalPoker.Tests
 
         private static Game Play(Game game, string playerName, int score)
         {
-            if (game == null)
-                game = new Game();
-            var rumples = new Player { Name = playerName };
-            game.AddPlayer(rumples);
-            var card = new Card { Player = rumples, Value = score };
-            game.Play(card);
-            return game;
+            return OM.GameM.Play(game, playerName, score);
         }
 
         [Test]

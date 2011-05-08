@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace PivotalPoker.Models
+﻿namespace PivotalPoker.Models
 {
     public class Card
     {
         public Player Player { get; set; }
-        public int Value { get; set; }
+        public int Points { get; set; }
     }
 }

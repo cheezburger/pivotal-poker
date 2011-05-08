@@ -8,29 +8,28 @@ namespace PivotalPoker.Models
     public class Pivotal : IPivotal
     {
         private readonly PivotalUser _user;
-        private const int ProjectId = 287145;
         public Pivotal(string key)
         {
             _user = new PivotalUser(key);
         }
 
         private const int Unestimated = -1;
-        public PivotalStory GetUnestimatedStory()
+        public PivotalStory GetUnestimatedStory(int projectId)
         {
-            return PivotalStory.FetchStories(_user, ProjectId).FirstOrDefault(ps => ps.Estimate == Unestimated);
+            return PivotalStory.FetchStories(_user, projectId).FirstOrDefault(ps => ps.Estimate == Unestimated);
         }
 
-        public void EstimateStory(int storyId, int? points)
+        public void EstimateStory(int projectId, int storyId, int points)
         {
-            var story = GetStory(storyId);
+            var story = GetStory(projectId, storyId);
             story.Estimate = points;
             story.UpdateStory(_user);
         }
 
         // internal
-        public PivotalStory GetStory(int storyId)
+        public PivotalStory GetStory(int projectId, int storyId)
         {
-            return PivotalStory.FetchStory(_user, ProjectId, storyId.ToString());
+            return PivotalStory.FetchStory(_user, projectId, storyId.ToString());
         }
 
         public IEnumerable<PivotalProject> GetProjects()

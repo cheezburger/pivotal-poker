@@ -1,13 +1,11 @@
-﻿using System;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using PivotalPoker.Controllers;
 using PivotalPoker.Models;
-using PivotalTrackerAPI.Domain.Model;
 
-namespace PivotalPoker.Tests
+namespace PivotalPoker.Tests.Controllers
 {
     [TestFixture]
     internal class HomeControllerTests
@@ -16,11 +14,9 @@ namespace PivotalPoker.Tests
         public void IfTheUserHasNoNameShowNameInput()
         {
             var gameStarter = new Mock<IGameStarter>();
-            var pivotal = new Mock<IPivotal>();
-            var games = new Mock<IGameRepository>();
             gameStarter.Setup(gs => gs.Name).Returns("");
 
-            var controller = new HomeController(gameStarter.Object, pivotal.Object, games.Object);
+            var controller = new HomeController(gameStarter.Object);
             var result = controller.Index();
 
             var viewResult = result as ViewResult;
@@ -28,35 +24,29 @@ namespace PivotalPoker.Tests
         }
 
         [Test]
-        public void IfTheUserHasSetTheirNameRedirectToAStory()
+        public void SettingTheNameRedirectsToProjects()
         {
             var gameStarter = new Mock<IGameStarter>();
-            var pivotal = new Mock<IPivotal>();
-            var games = new Mock<IGameRepository>();
-            pivotal.Setup(p => p.GetUnestimatedStory()).Returns(new PivotalStory { Id = 1 });
-            gameStarter.Setup(gs => gs.Name).Returns("Foo");
+            gameStarter.SetupProperty(g => g.Name);
+            var controller = new HomeController(gameStarter.Object);
+            var result = (RedirectToRouteResult)controller.Index("Foo");
 
-            var controller = new HomeController(gameStarter.Object, pivotal.Object, games.Object);
-            var result = controller.Index();
-
-            var redirectResult = result as RedirectToRouteResult;
-            redirectResult.Should().NotBeNull();
+            gameStarter.VerifySet(gs => gs.Name = "Foo");
+            Assert.That(result.RouteValues["controller"], Is.EqualTo("Projects"));
+            Assert.That(result.RouteValues["action"], Is.EqualTo("Index"));
         }
 
         [Test]
-        public void SettingTheNameRedirectsToAStory()
+        public void IndexRedirectsToProjectsIfNameIsSet()
         {
             var gameStarter = new Mock<IGameStarter>();
-            var pivotal = new Mock<IPivotal>();
-            var games = new Mock<IGameRepository>();
-            pivotal.Setup(p => p.GetUnestimatedStory()).Returns(new PivotalStory { Id = 1 });
+            gameStarter.Setup(gs => gs.Name).Returns("Foo");
 
-            var controller = new HomeController(gameStarter.Object, pivotal.Object, games.Object);
-            var result = controller.Index("Foo");
+            var controller = new HomeController(gameStarter.Object);
+            var result = (RedirectToRouteResult)controller.Index();
 
-            gameStarter.VerifySet(gs => gs.Name = "Foo");
-            var redirectResult = result as RedirectToRouteResult;
-            redirectResult.Should().NotBeNull(); 
+            Assert.That(result.RouteValues["controller"], Is.EqualTo("Projects"));
+            Assert.That(result.RouteValues["action"], Is.EqualTo("Index"));
         }
     }
 }
