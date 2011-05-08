@@ -33,16 +33,17 @@ namespace PivotalPoker.Controllers
             var player = game.Players.Single(p => p.Name == GameStarter.Name);
             game.Play(new Card { Player = player, Value = score });
 
-            return Json("");
+            return Status(id);
         }
 
-        public ActionResult Votes(int id)
+        public ActionResult Status(int id)
         {
             var game = Games.Get(id);
             var votes = from card in game.GetCards()
                         select new { name = card.Player.Name, vote = card.Value };
+            var gameState = new { completed = game.IsComplete, votes };
 
-            return Json(votes, JsonRequestBehavior.AllowGet);
+            return Json(gameState, JsonRequestBehavior.AllowGet);
         }
     }
 }

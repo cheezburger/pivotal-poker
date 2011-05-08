@@ -17,11 +17,13 @@
     <p id="otherEstimates">
     </p>
 </div>
-<script id="cardTemplate" type="text/x-jquery-tmpl">
+<script id="card" type="text/html">
+    {{#votes}}
     <div class='OtherEstimate FloatLeft'>
-        <div class='Card' style='display:inline'>${vote}</div>
-        <p>${name}</p>
+        <div class='Card' style='display:inline'>{{vote}}</div>
+        <p>{{name}}</p>
     </div>
+    {{/votes}}
 </script>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -31,11 +33,11 @@
             $.post('@Url.Action("vote", new { id = Model.Id })', { score: $(this).data('score') });
         });
         $('#otherEstimates').smartupdater({
-            url: '@Url.Action("votes")',
+            url: '@Url.Action("status")',
             dataType: 'json',
-            minTimeout: 2000
+            minTimeout: 1000
         }, function (data) {
-            $('#otherEstimates').empty().append($('#cardTemplate').tmpl(data));
+            $('#otherEstimates').empty().append(ich.card(data));
         });
     });
 </script>
