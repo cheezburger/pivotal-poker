@@ -21,7 +21,7 @@
     @Html.ActionLink("Start next story", "Index", "Projects")
 </p>
 <p>
-    @Html.ActionLink("Reset game", "Reset", "Story")
+    @Html.ActionLink("Reset game", "Reset", "Story", new { id = "reset" })
 </p>
 <script id="card" type="text/html">
     {{#votes}}
@@ -45,6 +45,10 @@
         }, function (data) {
             $('#otherEstimates').empty().append(ich.card(data));
             if (data.completed) $('#done').show();
+        });
+        $('#reset').click(function (event) {
+            event.preventDefault();
+            $.post(this.href);
         });
     });
 </script>
