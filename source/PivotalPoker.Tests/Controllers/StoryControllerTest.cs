@@ -8,7 +8,7 @@ using PivotalTrackerAPI.Domain.Model;
 namespace PivotalPoker.Tests.Controllers
 {
     [TestFixture]
-    public class StoryControllerTests
+    public class StoryControllerTest
     {
         [Test]
         public void VoteMayCauseGameConsensus()
