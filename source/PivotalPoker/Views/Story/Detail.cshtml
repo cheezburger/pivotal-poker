@@ -1,12 +1,25 @@
-﻿@model PivotalTrackerAPI.Domain.Model.PivotalStory
+﻿@model PivotalPoker.Controllers.StoryController.DetailModel
+@{
+    var story = Model.Story;
+}
 
-<h2 id="title">@Model.Name</h2>
-<span id="description">@Model.Description</span>
+<h2 id="title">@story.Name</h2>
+<span id="description">@story.Description</span>
+<h3>Tasks</h3>
+<ul id="tasks">
+    @foreach (var task in story.Tasks.OrderBy(s => s.Position))
+    {
+        <li>@task.Description</li>
+    }
+</ul>
+<h3>Comments</h3>
+<ul id="comments">
+</ul>
 
 <h3>Your Estimate</h3>
 
 <div style="clear: right;">
-    @for(int i=0; i<=3; i++){
+    @foreach(var i in Model.PointScaleOptions){
         <div data-score="@i" class="Selection Card FloatLeft">@i</div>
     }
     <div style="clear: both;"></div>

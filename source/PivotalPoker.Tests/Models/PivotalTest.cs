@@ -1,13 +1,12 @@
 ﻿using NUnit.Framework;
 using PivotalPoker.Models;
 
-namespace PivotalPoker.Tests
+namespace PivotalPoker.Tests.Models
 {
     [TestFixture]
     class PivotalTest
     {
-        [Test]
-        [Ignore]
+        [Test, Explicit]
         public void CanConnectToPivotal()
         {
             var config = new Config();
@@ -16,7 +15,7 @@ namespace PivotalPoker.Tests
             Assert.That(story, Is.Not.Null);
         }
 
-        [Test, Ignore]
+        [Test, Explicit]
         public void CanAssignPointsToAStory()
         {
             const int projectId = 0, storyId = 13115015;

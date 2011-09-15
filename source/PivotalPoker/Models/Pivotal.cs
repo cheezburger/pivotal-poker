@@ -34,7 +34,23 @@ namespace PivotalPoker.Models
 
         public IEnumerable<PivotalProject> GetProjects()
         {
-            return PivotalProject.FetchProjects(_user);
+            var projects = PivotalProject.FetchProjects(_user);
+            return projects;
+        }
+
+        /// <summary>
+        /// Does not fetch stories.
+        /// </summary>
+        /// <param name="projectId"></param>
+        /// <returns></returns>
+        public PivotalProject GetProject(int projectId)
+        {
+            return PivotalProject.FetchProject(_user, projectId, false);
+        }
+
+        public void LoadTasks(PivotalStory story)
+        {
+            story.LoadTasks(_user);
         }
     }
 }

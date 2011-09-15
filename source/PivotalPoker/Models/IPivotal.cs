@@ -9,5 +9,7 @@ namespace PivotalPoker.Models
         void EstimateStory(int projectId, int storyId, int points);
         PivotalStory GetStory(int projectId, int storyId);
         IEnumerable<PivotalProject> GetProjects();
+        PivotalProject GetProject(int projectId);
+        void LoadTasks(PivotalStory story);
     }
 }

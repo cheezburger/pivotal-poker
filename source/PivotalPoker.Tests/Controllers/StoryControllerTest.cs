@@ -40,69 +40,6 @@ namespace PivotalPoker.Tests.Controllers
         }
 
         [Test]
-        public void ReturnsStoryDetails()
-        {
-            const int projectId = 123, storyId = 456;
-            var pivotalMock = new Mock<IPivotal>();
-            pivotalMock.Setup(p => p.GetStory(projectId, storyId)).Returns(new PivotalStory { Id = storyId, ProjectId = projectId });
-
-            var game = new Game();
-            var gameRepositoryMock = new Mock<IGameRepository>();
-            gameRepositoryMock.Setup(g => g.Get(projectId, storyId)).Returns(game);
-            var gameStarterMock = new Mock<IGameStarter>();
-
-            var c = new StoryController(pivotalMock.Object, gameRepositoryMock.Object, gameStarterMock.Object);
-            var result = (ViewResult)c.Detail(projectId, storyId);
-            var model = (PivotalStory)result.Model;
-
-            Assert.That(model.ProjectId, Is.EqualTo(projectId));
-            Assert.That(model.Id, Is.EqualTo(storyId));
-        }
-
-        [Test]
-        public void AddsPlayerToGameOnViewOfStory()
-        {
-            const int projectId = 123, storyId = 456;
-            var pivotalMock = new Mock<IPivotal>();
-            pivotalMock.Setup(p => p.GetStory(projectId, storyId)).Returns(new PivotalStory { Id = storyId, ProjectId = projectId });
-
-            var game = new Game();
-            var gameRepositoryMock = new Mock<IGameRepository>();
-            gameRepositoryMock.Setup(g => g.Get(projectId, storyId)).Returns(game);
-
-            const string playerName = "Rumples";
-            var gameStarterMock = new Mock<IGameStarter>();
-            gameStarterMock.Setup(g => g.Name).Returns(playerName);
-
-            var c = new StoryController(pivotalMock.Object, gameRepositoryMock.Object, gameStarterMock.Object);
-            c.Detail(projectId, storyId);
-
-            Assert.That(game.Players, Has.Some.Property("Name").EqualTo(playerName));
-        }
-
-        [Test]
-        public void WontAddExistingPlayerToGame()
-        {
-            const int projectId = 123, storyId = 456;
-            var pivotalMock = new Mock<IPivotal>();
-            pivotalMock.Setup(p => p.GetStory(projectId, storyId)).Returns(new PivotalStory { Id = storyId, ProjectId = projectId });
-
-            var game = new Game();
-            var gameRepositoryMock = new Mock<IGameRepository>();
-            gameRepositoryMock.Setup(g => g.Get(projectId, storyId)).Returns(game);
-
-            const string playerName = "Rumples";
-            var gameStarterMock = new Mock<IGameStarter>();
-            gameStarterMock.Setup(g => g.Name).Returns(playerName);
-
-            var c = new StoryController(pivotalMock.Object, gameRepositoryMock.Object, gameStarterMock.Object);
-            c.Detail(projectId, storyId);
-            c.Detail(projectId, storyId);
-
-            Assert.That(game.Players, Has.Count.EqualTo(1));
-        }
-
-        [Test]
         public void CanResetGame()
         {
             const int projectId = 123, storyId = 456;

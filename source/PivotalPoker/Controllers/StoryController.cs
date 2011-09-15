@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using PivotalPoker.Models;
+using PivotalTrackerAPI.Domain.Model;
 
 namespace PivotalPoker.Controllers
 {
@@ -20,12 +22,29 @@ namespace PivotalPoker.Controllers
 
         private string CurrentUserName { get { return _gameStarter.Name; } }
 
+        public class DetailModel
+        {
+            public PivotalStory Story { get; set; }
+            public IEnumerable<int> PointScaleOptions { get; set; }
+        }
+
         public ActionResult Detail(int projectId, int storyId)
         {
             var game = _games.Get(projectId, storyId);
             EnsurePlayerExists(game, CurrentUserName);
 
-            return View(_pivotal.GetStory(projectId, storyId));
+            var project = _pivotal.GetProject(projectId);
+            var pointScaleOptions = project.PointScale.Split(',').Select(n => int.Parse(n));
+            var story = _pivotal.GetStory(projectId, storyId);
+            _pivotal.LoadTasks(story);
+            
+            var model = new DetailModel
+            {
+                Story = story,
+                PointScaleOptions = pointScaleOptions
+            };
+
+            return View(model);
         }
 
         private static void EnsurePlayerExists(Game game, string playerName)

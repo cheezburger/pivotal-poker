@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\ProjectsControllerTest.cs" />
+    <Compile Include="Controllers\StoryControllerTests\DetailTest.cs" />
     <Compile Include="Models\GameRepositoryTest.cs" />
     <Compile Include="Controllers\HomeControllerTests.cs" />
     <Compile Include="Models\GameTest.cs" />
