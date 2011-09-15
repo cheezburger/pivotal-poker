@@ -6,7 +6,7 @@ namespace PivotalPoker.Tests.Models
     [TestFixture]
     class PivotalTest
     {
-        [Test, Explicit]
+        [Test, Ignore]
         public void CanConnectToPivotal()
         {
             var config = new Config();
@@ -15,7 +15,7 @@ namespace PivotalPoker.Tests.Models
             Assert.That(story, Is.Not.Null);
         }
 
-        [Test, Explicit]
+        [Test, Ignore]
         public void CanAssignPointsToAStory()
         {
             const int projectId = 0, storyId = 13115015;
