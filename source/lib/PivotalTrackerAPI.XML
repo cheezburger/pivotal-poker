@@ -435,6 +435,16 @@
             <param name="removeIfHasAttributes">Controls whether the cleanup should remove any attributes and remove any elements that have attributes (useful when the only reason for an attribute is the deserialization putting a nil attribute in the emitted xml)</param>
             <returns>The cleaned xml as a string, ready for submission</returns>
         </member>
+        <member name="T:PivotalTrackerAPI.Domain.Model.PivotalNoteList">
+            <summary>
+             Container for a note list
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalNoteList.Notes">
+            <summary>
+             List of notes
+            </summary>
+        </member>
         <member name="T:PivotalTrackerAPI.Domain.Model.PivotalMembershipList">
             <summary>
             Container class for lists of memberships
@@ -566,6 +576,13 @@
             <returns>the stories for the project</returns>
         </member>
         <member name="M:PivotalTrackerAPI.Domain.Model.PivotalStory.LoadTasks(PivotalTrackerAPI.Domain.Model.PivotalUser)">
+            <summary>
+            Updates the cache of tasks for the story and returns the list
+            </summary>
+            <param name="user">The user to get the ApiToken from</param>
+            <returns></returns>
+        </member>
+        <member name="M:PivotalTrackerAPI.Domain.Model.PivotalStory.LoadNotes(PivotalTrackerAPI.Domain.Model.PivotalUser)">
             <summary>
             Updates the cache of tasks for the story and returns the list
             </summary>
@@ -720,6 +737,12 @@
             The cached list of tasks for the story.  Be sure to use LoadTasks before calling this.  Once that method is called, use this property to access previously retrieved tasks
             </summary>
             <remarks>If you set this property and intend to save it, you have to then iterate the collection of tasks and call add yourself or set the option when creating the story</remarks>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalStory.Notes">
+            <summary>
+            The cached list of notes for the story.  Be sure to use LoadNotes before calling this.  Once that method is called, use this property to access previously retrieved tasks
+            </summary>
+            <remarks>If you set this property and intend to save it, you have to then iterate the collection of notes and call add yourself or set the option when creating the story</remarks>
         </member>
         <member name="T:PivotalTrackerAPI.Util.SerializationHelper">
             <summary>
@@ -898,6 +921,31 @@
         <member name="P:PivotalTrackerAPI.Domain.Model.PivotalPerson.Initials">
             <summary>
             The person's initials
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalNote.NoteId">
+            <summary>
+            The id of the note
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalNote.Text">
+            <summary>
+            The content of the note
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalNote.Author">
+            <summary>
+            The author of the note
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalNote.CreationDateString">
+            <summary>
+            The string representing the date the note was created (as returned by Pivotal).  See CreationDate for the value
+            </summary>
+        </member>
+        <member name="P:PivotalTrackerAPI.Domain.Model.PivotalNote.CreationDate">
+            <summary>
+            The date the task was created
             </summary>
         </member>
         <member name="M:PivotalTrackerAPI.Util.WebEncoding.UrlEncode(System.String)">

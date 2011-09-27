@@ -40,7 +40,7 @@ namespace PivotalPoker.Controllers
             var pointScaleOptions = project.PointScale.Split(',').Select(n => int.Parse(n));
             var story = _pivotal.GetStory(projectId, storyId);
             _pivotal.LoadTasks(story);
-            
+            _pivotal.LoadNotes(story);
             var model = new DetailModel
             {
                 Story = story,

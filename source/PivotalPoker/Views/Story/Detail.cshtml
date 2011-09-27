@@ -14,8 +14,12 @@
 </ul>
 <h3>Comments</h3>
 <ul id="comments">
+    @foreach(var note in story.Notes.OrderBy(n => n.CreationDate))
+    {
+        <li>@note.Author: @note.Text</li>
+    }
 </ul>
-
+    
 <h3>Your Estimate</h3>
 
 <div style="clear: right;">

@@ -11,5 +11,6 @@ namespace PivotalPoker.Models
         IEnumerable<PivotalProject> GetProjects();
         PivotalProject GetProject(int projectId);
         void LoadTasks(PivotalStory story);
+        void LoadNotes(PivotalStory story);
     }
 }

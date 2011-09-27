@@ -52,5 +52,10 @@ namespace PivotalPoker.Models
         {
             story.LoadTasks(_user);
         }
+
+        public void LoadNotes(PivotalStory story)
+        {
+            story.LoadNotes(_user);
+        }
     }
 }
