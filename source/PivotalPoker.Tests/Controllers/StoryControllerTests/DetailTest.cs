@@ -11,6 +11,8 @@ namespace PivotalPoker.Tests.Controllers.StoryControllerTests
     [TestFixture]
     public class DetailTest
     {
+        private const string Rumples = "Rumples";
+
         class Helper
         {
             public const int ProjectId = 123;
@@ -50,7 +52,8 @@ namespace PivotalPoker.Tests.Controllers.StoryControllerTests
         public void CanGetStoryDetailsAndPointScale()
         {
             var helper = new Helper();
-
+            helper.GameStarterName(Rumples);
+            
             var c = helper.Create();
 
             var result = (ViewResult)c.Detail(Helper.ProjectId, Helper.StoryId);
@@ -66,30 +69,38 @@ namespace PivotalPoker.Tests.Controllers.StoryControllerTests
         [Test]
         public void AddsPlayerToGameOnViewOfStory()
         {
-            const string playerName = "Rumples";
-
             var helper = new Helper();
-            helper.GameStarterName(playerName);
+            helper.GameStarterName(Rumples);
 
             var c = helper.Create();
             c.Detail(Helper.ProjectId, Helper.StoryId);
 
-            Assert.That(helper.Game.Players, Has.Some.Property("Name").EqualTo(playerName));
+            Assert.That(helper.Game.Players, Has.Some.Property("Name").EqualTo(Rumples));
         }
 
         [Test]
         public void WontAddExistingPlayerToGame()
         {
-            const string playerName = "Rumples";
-
             var helper = new Helper();
-            helper.GameStarterName(playerName);
+            helper.GameStarterName(Rumples);
 
             var c = helper.Create();
             c.Detail(Helper.ProjectId, Helper.StoryId);
             c.Detail(Helper.ProjectId, Helper.StoryId);
 
             Assert.That(helper.Game.Players, Has.Count.EqualTo(1));
+        }
+
+        [Test]
+        public void WhenPlayerNameIsEmptyShouldRedirectToHome()
+        {
+            var helper = new Helper();
+            helper.GameStarterName(string.Empty);
+
+            var c = helper.Create();
+            var result = c.Detail(Helper.ProjectId, Helper.StoryId);
+            
+            Assert.That(result, Is.AssignableTo<RedirectToRouteResult>());
         }
     }
 }

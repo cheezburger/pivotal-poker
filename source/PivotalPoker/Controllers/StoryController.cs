@@ -30,6 +30,9 @@ namespace PivotalPoker.Controllers
 
         public ActionResult Detail(int projectId, int storyId)
         {
+            if (string.IsNullOrEmpty(CurrentUserName))
+                return RedirectToAction("Index", "Home");
+
             var game = _games.Get(projectId, storyId);
             EnsurePlayerExists(game, CurrentUserName);
 
